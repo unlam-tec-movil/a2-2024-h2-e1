@@ -5,7 +5,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import ar.edu.unlam.mobile.scaffolding.ui.components.Greeting
 
 @Composable
 fun HomeScreen(
@@ -23,7 +22,6 @@ fun HomeScreen(
         }
 
         is HelloMessageUIState.Success -> {
-            Greeting(helloState.message, modifier)
         }
 
         is HelloMessageUIState.Error -> {
