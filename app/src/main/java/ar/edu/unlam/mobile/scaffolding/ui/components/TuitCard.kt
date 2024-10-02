@@ -24,7 +24,7 @@ fun TuitCard(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier.size(300.dp, 400.dp),
+        modifier = modifier,
     ) {
         Box(modifier = Modifier.padding(8.dp)) {
             Column {
@@ -38,9 +38,10 @@ fun TuitCard(
                     }
                     Column(
                         verticalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(50.dp),
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .height(50.dp),
                     ) {
                         Text(tuit.authorName, fontSize = 16.sp)
                     }
