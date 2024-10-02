@@ -5,6 +5,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
+import ar.edu.unlam.mobile.scaffolding.ui.components.TuitCard
 
 @Composable
 fun HomeScreen(
@@ -22,6 +24,18 @@ fun HomeScreen(
         }
 
         is HelloMessageUIState.Success -> {
+            val tuit =
+                Tuit(
+                    id = 1,
+                    authorName = "John Doe",
+                    content = "Esto es un tuit de prueba!",
+                    avatar = "https://ih1.redbubble.net/image.1221593566.8336/mwo,x1000,ipad_2_snap-pad,750x1000,f8f8f8.jpg",
+                    likes = 0,
+                    liked = false,
+                    replies = 0,
+                    reply = { id -> },
+                )
+            TuitCard(tuit)
         }
 
         is HelloMessageUIState.Error -> {

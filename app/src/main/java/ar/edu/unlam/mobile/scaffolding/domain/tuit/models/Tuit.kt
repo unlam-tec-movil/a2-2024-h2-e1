@@ -8,5 +8,5 @@ data class Tuit(
     val likes: Int,
     val liked: Boolean,
     val replies: Int,
-    val reply: (id: Int) -> Void,
+    val reply: (id: Int) -> Unit,
 )
