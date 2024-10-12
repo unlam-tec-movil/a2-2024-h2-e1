@@ -12,6 +12,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
@@ -52,6 +54,8 @@ fun MainScreen() {
             IconButton(onClick = { controller.navigate("home") }) {
                 Icon(Icons.Filled.Home, contentDescription = "Home")
             }
+
+
         },
     ) { paddingValue ->
         // NavHost es el componente que funciona como contenedor de los otros componentes que
@@ -63,6 +67,9 @@ fun MainScreen() {
                 // Home es el componente en sí que es el destino de navegación.
                 HomeScreen(modifier = Modifier.padding(paddingValue))
             }
+
         }
     }
 }
+
+

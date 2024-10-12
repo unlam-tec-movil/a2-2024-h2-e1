@@ -1,6 +1,8 @@
 package ar.edu.unlam.mobile.scaffolding.ui.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -8,6 +10,8 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -21,10 +25,14 @@ fun BottomBar(controller: NavHostController) {
             onClick = { controller.navigate("home") },
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Home,
+                    imageVector = Icons.Default.Build,
                     contentDescription = "Home",
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = MaterialTheme.colorScheme.secondary,
+                    modifier = Modifier.padding(8.dp),
+
                 )
+
+
             },
         )
     }
