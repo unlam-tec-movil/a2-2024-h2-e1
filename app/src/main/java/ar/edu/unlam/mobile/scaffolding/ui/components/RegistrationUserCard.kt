@@ -12,9 +12,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+//import androidx.compose.runtime.mutableStateOf
+//import androidx.compose.runtime.remember
+//import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -29,65 +29,65 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.unlam.mobile.scaffolding.R
-
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 @Preview
-fun RegistrationUserCard(){
-    Card{
+fun RegistrationUserCard(viewModel: RegistrationViewModel = viewModel()) {
+    Card {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-        ){
+        ) {
 
-        val gradientColors = listOf(Cyan, Blue, Magenta /*...*/)
-        var email by remember { mutableStateOf("") }
-        var name by remember { mutableStateOf("") }
-        var pass by remember { mutableStateOf("") }
-        Text(
-            stringResource(R.string.registrarse),
+            val gradientColors = listOf(Cyan, Blue, Magenta)
+            val email by viewModel.email
+            val name by viewModel.name
+            val pass by viewModel.pass
 
-            textAlign = TextAlign.Center,
-            fontSize = 24.sp,
-            modifier = Modifier.width(200.dp),
-            style = TextStyle(
-                brush = Brush.linearGradient(
-                    colors = gradientColors
+            Text(
+                text = stringResource(R.string.registrarse),
+                textAlign = TextAlign.Center,
+                fontSize = 24.sp,
+                modifier = Modifier.width(200.dp),
+                style = TextStyle(
+                    brush = Brush.linearGradient(
+                        colors = gradientColors
+                    )
                 )
             )
-        )
 
-    Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text(stringResource(R.string.correo)) }
-        )
+            OutlinedTextField(
+                value = email,
+                onValueChange = { viewModel.onEmailChange(it) },
+                label = { Text(stringResource(R.string.correo)) }
+            )
 
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text(stringResource(R.string.nombre)) }
-        )
+            OutlinedTextField(
+                value = name,
+                onValueChange = { viewModel.onNameChange(it) },
+                label = { Text(stringResource(R.string.nombre)) }
+            )
 
-        OutlinedTextField(
-            value = pass,
-            onValueChange = { pass = it },
-            label = { Text(stringResource(R.string.contrase_a)) }
-        )
-    Spacer(modifier = Modifier.height(16.dp))
-        OutlinedButton(onClick = { onClick() }) {
-            Text(stringResource(R.string.enviar))
+            OutlinedTextField(
+                value = pass,
+                onValueChange = { viewModel.onPassChange(it) },
+                label = { Text(stringResource(R.string.contrase_a)) }
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            OutlinedButton(onClick = { viewModel.onSubmit() }) {
+                Text(stringResource(R.string.enviar))
+            }
         }
-
-    }
     }
 }
-
-fun onClick() {
+/*fun onClick() {
     TODO("Not yet implemented")
-}
+}*/
