@@ -1,5 +1,4 @@
 package ar.edu.unlam.mobile.scaffolding.ui.components
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,38 +18,37 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
+//import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Cyan
 import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.graphics.Color.Companion.Magenta
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
+import ar.edu.unlam.mobile.scaffolding.R
 
 
 @Composable
 @Preview
-fun RegistrationUserCard() {
-
-    Card() {
-Column(
-
-    modifier = Modifier.fillMaxSize().padding(16.dp),
-    verticalArrangement = Arrangement.Center,
-    horizontalAlignment = Alignment.CenterHorizontally,
-
-
-){
+fun RegistrationUserCard(){
+    Card{
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ){
 
         val gradientColors = listOf(Cyan, Blue, Magenta /*...*/)
         var email by remember { mutableStateOf("") }
         var name by remember { mutableStateOf("") }
         var pass by remember { mutableStateOf("") }
         Text(
-            "REGISTRARSE",
+            stringResource(R.string.registrarse),
 
             textAlign = TextAlign.Center,
             fontSize = 24.sp,
@@ -67,26 +65,27 @@ Column(
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("E-mail") }
+            label = { Text(stringResource(R.string.correo)) }
         )
 
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Nombre") }
+            label = { Text(stringResource(R.string.nombre)) }
         )
 
         OutlinedTextField(
             value = pass,
             onValueChange = { pass = it },
-            label = { Text("Contraseña") }
+            label = { Text(stringResource(R.string.contrase_a)) }
         )
     Spacer(modifier = Modifier.height(16.dp))
         OutlinedButton(onClick = { onClick() }) {
-            Text("Enviar")
+            Text(stringResource(R.string.enviar))
         }
 
-    }}
+    }
+    }
 }
 
 fun onClick() {
