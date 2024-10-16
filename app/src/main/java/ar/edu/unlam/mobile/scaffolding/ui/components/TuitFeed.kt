@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile.scaffolding.ui.components
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,7 +12,8 @@ import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 
 @Composable
 fun TuitFeed(tuits: List<Tuit>) {
-    LazyColumn {
+    var modifier = Modifier.fillMaxSize()
+    LazyColumn(modifier.padding(top = 10.dp)) {
         items(tuits) { tuit ->
             TuitCard(tuit, modifier = Modifier.padding(1.dp))
         }
