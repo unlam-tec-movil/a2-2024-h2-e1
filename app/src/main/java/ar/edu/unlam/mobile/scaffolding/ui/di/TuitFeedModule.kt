@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile.scaffolding.data.di
+package ar.edu.unlam.mobile.scaffolding.ui.di
 
 import ar.edu.unlam.mobile.scaffolding.data.network.TuitRepositoryImplementation
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.repository.TuitRepository

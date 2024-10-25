@@ -11,6 +11,10 @@ class TuitRepositoryImplementation
     constructor() : TuitRepository {
         private val tuits = mutableListOf<Tuit>()
 
+        companion object {
+            const val url: String = "https://tuiter-back-xcdb34ok6q-tl.a.run.app/v1/"
+        }
+
         init {
             val browsedTweets =
                 listOf(
