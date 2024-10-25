@@ -1,8 +1,8 @@
-package ar.edu.unlam.mobile.scaffolding.data.di
+package ar.edu.unlam.mobile.scaffolding.data.local.di
 
 import android.content.Context
 import androidx.room.Room
-import ar.edu.unlam.mobile.scaffolding.data.local.UsersDatabase
+import ar.edu.unlam.mobile.scaffolding.data.local.LocalDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,17 +12,16 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object LocalUserProvider {
+object LocalDataBaseProvider {
     @Provides
     @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context,
-    ): UsersDatabase =
-
+    ): LocalDataBase =
         Room
             .databaseBuilder(
-                context,
-                UsersDatabase::class.java,
-                "real_androids_database",
+                context.applicationContext,
+                LocalDataBase::class.java,
+                "not_twitter_database",
             ).build()
 }

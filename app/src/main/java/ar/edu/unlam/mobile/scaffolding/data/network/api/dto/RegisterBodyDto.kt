@@ -8,5 +8,5 @@ data class RegisterBodyDto
         val email: String,
         val password: String,
         val name: String,
-        val avatar_url: String = "https://images.pexels.com/photos/428364/pexels-photo-428364.jpeg",
+        val avatarURL: String = "https://images.pexels.com/photos/428364/pexels-photo-428364.jpeg",
     )

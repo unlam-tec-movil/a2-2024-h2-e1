@@ -1,14 +1,15 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
+import android.util.Log
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.unlam.mobile.scaffolding.domain.login.services.UserLoginService
+import ar.edu.unlam.mobile.scaffolding.domain.login.services.UserRegistrationService
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
-import ar.edu.unlam.mobile.scaffolding.domain.user.repository.UserRepository
-import ar.edu.unlam.mobile.scaffolding.domain.user.services.UserLoginService
-import ar.edu.unlam.mobile.scaffolding.domain.user.services.UserRegistrationService
+import ar.edu.unlam.mobile.scaffolding.domain.user.services.GetUserService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -47,10 +48,9 @@ data class IsLoggedUIState(
 class LoginViewModel
     @Inject
     constructor(
-        private val repo: UserRepository,
         private val userLogin: UserLoginService,
-        val registrationService: UserRegistrationService,
-        // private val localDataService: AccessToUserLocalDataUseCase,
+        private val registrationService: UserRegistrationService,
+        private val getUserService: GetUserService,
     ) : ViewModel() {
         private val _email = mutableStateOf("")
         private val _password = mutableStateOf("")
@@ -73,7 +73,7 @@ class LoginViewModel
 
         fun logIn() {
             viewModelScope.launch {
-                val result = userLogin.login(_email.value, _password.value)
+                val result = userLogin.login(email = _email.value, password = _password.value)
                 if (result) {
                     _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
                 }
@@ -82,9 +82,15 @@ class LoginViewModel
 
         fun register() {
             viewModelScope.launch {
-                val result = registrationService.register(_email.value, _name.value, _password.value)
+                val result =
+                    registrationService.register(
+                        email = _email.value,
+                        name = _name.value,
+                        password = _password.value,
+                    )
                 if (result) {
-                    _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
+                    var user = getUserService.getUserData()
+                    Log.i("User", user.toString())
                 }
             }
         }

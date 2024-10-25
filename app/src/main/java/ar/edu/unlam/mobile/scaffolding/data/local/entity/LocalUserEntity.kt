@@ -1,30 +1,28 @@
+package ar.edu.unlam.mobile.scaffolding.data.local.entity
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 
 @Entity(tableName = "users")
-data class UserEntity(
+data class LocalUserEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val avatarUrl: String,
-    val name: String,
-    val email: String,
-    val token: String,
+    val name: String = "",
+    val email: String = "",
+    val avatar_url: String = "",
 )
 
-fun UserEntity.asModel() =
+fun LocalUserEntity.asModel() =
     User(
-        avatarUrl = avatarUrl,
+        avatar_url = avatar_url,
         email = email,
-        id = id.toUInt(),
         name = name,
-        password = token,
     )
 
 fun User.asEntity() =
-    UserEntity(
-        avatarUrl = avatarUrl,
+    LocalUserEntity(
+        avatar_url = avatar_url,
         email = email,
         name = name,
-        token = password,
     )

@@ -6,6 +6,7 @@ import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LoginBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.RegisterBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.toDomain
 import ar.edu.unlam.mobile.scaffolding.domain.login.models.LoggedUserToken
+import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import javax.inject.Inject
 
 class ApiRepository
@@ -18,7 +19,7 @@ class ApiRepository
             password: String,
         ): LoggedUserToken? {
             try {
-                var logged = api.logInUser(LoginBodyDto(email, password))
+                var logged = api.logInUser(LoginBodyDto(email = email, password = password))
                 return logged.toDomain()
             } catch (e: Exception) {
                 Log.e("Error", e.message.orEmpty())
@@ -32,8 +33,18 @@ class ApiRepository
             password: String,
         ): LoggedUserToken? {
             try {
-                var registered = api.registerUser(RegisterBodyDto(email, name, password))
+                var registered = api.registerUser(RegisterBodyDto(email = email, password = password, name = name))
                 return registered.toDomain()
+            } catch (e: Exception) {
+                Log.e("Error", e.message.orEmpty())
+                return null
+            }
+        }
+
+        suspend fun getProfile(token: String): User? {
+            try {
+                var profile = api.getProfile(token)
+                return profile.toDomain()
             } catch (e: Exception) {
                 Log.e("Error", e.message.orEmpty())
                 return null

@@ -1,7 +1,7 @@
 package ar.edu.unlam.mobile.scaffolding.ui.di
 
-import ar.edu.unlam.mobile.scaffolding.domain.user.services.UserRegistrationService
-import ar.edu.unlam.mobile.scaffolding.domain.user.usecases.UserRegistration
+import ar.edu.unlam.mobile.scaffolding.domain.login.services.UserRegistrationService
+import ar.edu.unlam.mobile.scaffolding.domain.login.usecases.UserRegistration
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
