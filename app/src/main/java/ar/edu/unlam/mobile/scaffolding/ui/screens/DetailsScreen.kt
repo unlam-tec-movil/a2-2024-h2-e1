@@ -1,27 +1,31 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
-import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,8 +36,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ar.edu.unlam.mobile.scaffolding.R
-import ar.edu.unlam.mobile.scaffolding.R.*
+import androidx.compose.ui.unit.max
+import ar.edu.unlam.mobile.scaffolding.R.drawable
 
 
 class DetailsScreen : ComponentActivity(){
@@ -46,16 +50,19 @@ class DetailsScreen : ComponentActivity(){
 }
 @Composable
 fun ProfileView(){
-    ProfileTopBar()
-    ProfileTuitList()
+Column() {
+    Box(){ProfileTopBar()}
+    Box(){ProfileTuitList()}
+    Box(modifier = Modifier.wrapContentHeight(Alignment.Bottom).padding(bottom = 40.dp)){ProfileBotBar {  }}
+}
 }
 @Composable
 fun ProfileTopBar(){
     Column(modifier = Modifier.background(Color.White).padding(2.dp)) {
-        Imagenes()
-        NombreUsuario()
-        StatsBar()
-        ProfileButtons {  }
+        Box(){Imagenes()}
+        Box(){NombreUsuario()}
+        Box(){StatsBar()}
+        Box(){ProfileButtons {  }}
     }
 }
 
@@ -128,25 +135,51 @@ fun ProfileButtons(onClick: () -> Unit ){
 
 @Composable
 fun ProfileTuitList() {
-    OutlinedCard(
+    Card(
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ),
-        border = BorderStroke(1.dp, Color.Black),
-        modifier = Modifier.fillMaxWidth()
-
+        modifier = Modifier.fillMaxWidth().padding(bottom= 400.dp)
     ) {
         Text(
-            text = "Outlined",
+            text = "Filled",
             modifier = Modifier
                 .padding(16.dp),
             textAlign = TextAlign.Center,
         )
     }
+
+
+}
+
+@Composable
+fun ProfileBotBar(onClick: () -> Unit) {
+    Row(modifier = Modifier.fillMaxWidth().wrapContentWidth() ){
+
+
+            FloatingActionButton(
+                onClick = { onClick() },modifier = Modifier.weight(1f)
+            ) {
+                Icon(Icons.Filled.Add, "Floating action button.",)
+            }
+
+        FloatingActionButton(
+            onClick = { onClick() },modifier = Modifier.weight(1f)
+        ) {
+            Icon(Icons.Filled.Add, "Floating action button.")
+        }
+
+        FloatingActionButton(
+            onClick = { onClick() }, modifier = Modifier.weight(1f)
+        ) {
+            Icon(Icons.Filled.Email, "Fl",)
+        }
+
+    }
 }
 
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 fun previewTextos(){
     ProfileView()
