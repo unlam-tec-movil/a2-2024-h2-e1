@@ -1,6 +1,5 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
-import android.util.Log
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -75,6 +74,7 @@ class LoginViewModel
             viewModelScope.launch {
                 val result = userLogin.login(email = _email.value, password = _password.value)
                 if (result) {
+                    var user = getUserService.getUserData()
                     _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
                 }
             }
@@ -90,7 +90,7 @@ class LoginViewModel
                     )
                 if (result) {
                     var user = getUserService.getUserData()
-                    Log.i("User", user.toString())
+                    _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
                 }
             }
         }
