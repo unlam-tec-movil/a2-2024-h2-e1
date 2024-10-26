@@ -32,20 +32,14 @@ class HomeViewModel
     constructor(
         repo: TuitRepository,
     ) : ViewModel() {
-        // Mutable State Flow contiene un objeto de estado mutable. Simplifica la operación de
-        // actualización de información y de manejo de estados de una aplicación: Cargando, Error, Éxito
-        // (https://developer.android.com/kotlin/flow/stateflow-and-sharedflow)
-        // _helloMessage State es el estado del componente "HelloMessage" inicializado como "Cargando"
+
         private val helloMessage = MutableStateFlow(TuitFeedUIState.Loading)
 
-        // _Ui State es el estado general del view model.
         private val _uiState =
             MutableStateFlow(
                 TuitUIState(helloMessage.value),
             )
 
-        // UIState expone el estado anterior como un Flujo de Estado de solo lectura.
-        // Esto impide que se pueda modificar el estado desde fuera del ViewModel.
         val uiState = _uiState.asStateFlow()
 
         init {

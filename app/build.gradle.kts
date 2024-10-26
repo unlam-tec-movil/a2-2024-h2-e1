@@ -65,6 +65,8 @@ dependencies {
 
     // Coil
     implementation(libs.io.coil.kt)
+    implementation(libs.androidx.storage)
+    implementation(libs.androidx.storage)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

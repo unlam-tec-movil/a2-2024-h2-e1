@@ -39,15 +39,38 @@ fun TuitCard(
                     Column(
                         verticalArrangement = Arrangement.Center,
                         modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .height(50.dp),
+                        Modifier
+                            .fillMaxWidth()
+                            .height(50.dp),
                     ) {
                         Text(tuit.authorName, fontSize = 16.sp)
                     }
                 }
                 Row {
                     Text(tuit.content, fontSize = 24.sp)
+                }
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    LikeButton(
+                        liked = tuit.liked,
+                        likeCount = tuit.likes,
+                        onLikeClicked = {
+                            tuit.liked = !tuit.liked
+                            tuit.likes += if (tuit.liked) 1 else -1
+                        }
+                    )
+
+                    ReplyButton(
+                        replyCount = tuit.replies,
+                        onReplyClicked = {
+                            tuit.reply(tuit.id)
+                        }
+                    )
                 }
             }
         }
@@ -63,10 +86,10 @@ fun TuitCardPreview() {
             authorName = "John Doe",
             content = "Esto es un tuit de prueba!",
             avatar = "https://ih1.redbubble.net/image.1221593566.8336/mwo,x1000,ipad_2_snap-pad,750x1000,f8f8f8.jpg",
-            likes = 0,
+            likes = 5,
             liked = false,
-            replies = 0,
-            reply = { id -> },
+            replies = 2,
+            reply = { id -> println("Respuesta al tuit con id: $id") },
         )
     TuitCard(tuit)
 }
