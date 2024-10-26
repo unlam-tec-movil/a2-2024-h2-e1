@@ -8,13 +8,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object LocalDataBaseProvider {
+    @Suppress("ktlint:standard:property-naming")
     @Provides
-    @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context,
     ): LocalDataBase =

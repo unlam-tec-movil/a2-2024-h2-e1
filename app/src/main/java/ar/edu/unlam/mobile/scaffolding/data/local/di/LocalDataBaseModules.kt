@@ -13,8 +13,8 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 abstract class LocalDataBaseModules {
     @Binds
-    abstract fun provideDatabaseImplem(localDataUserImplementation: DatabaseImplementation): LocalUserDataBaseRepository
+    abstract fun provideRoomDataBaseRepository(databaseImplementation: RoomDataBaseRepository): DataBaseRepository
 
     @Binds
-    abstract fun provideRoomDataBaseRepository(databaseImplementation: RoomDataBaseRepository): DataBaseRepository
+    abstract fun provideDatabaseImplem(localDataUserImplementation: DatabaseImplementation): LocalUserDataBaseRepository
 }
