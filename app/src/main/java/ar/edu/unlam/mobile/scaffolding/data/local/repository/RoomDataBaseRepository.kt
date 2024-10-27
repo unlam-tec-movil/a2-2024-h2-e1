@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile.scaffolding.data.local.repository
 
+import android.util.Log
 import ar.edu.unlam.mobile.scaffolding.data.local.LocalDataBase
 import ar.edu.unlam.mobile.scaffolding.data.local.entity.asEntity
 import ar.edu.unlam.mobile.scaffolding.data.local.entity.asModel
@@ -23,7 +24,14 @@ class RoomDataBaseRepository
                 }
             }
 
-        override suspend fun createUser(user: User) {
-            localUsersDao.createUser(user.asEntity())
+        override suspend fun createUser(user: User): Boolean {
+            try {
+                localUsersDao.createUser(user.asEntity())
+                Log.i("RoomDataBaseRepository", "User created: $user")
+                return true
+            } catch (e: Exception) {
+                Log.i("RoomDataBaseRepository", "Error creating user: $e")
+                return false
+            }
         }
     }

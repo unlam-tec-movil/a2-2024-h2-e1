@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LocalUserDao {
     @Query("SELECT * FROM users")
-    suspend fun listUsers(): Flow<List<LocalUserEntity>>
+    fun listUsers(): Flow<List<LocalUserEntity>>
 
     @Insert
     suspend fun createUser(android: LocalUserEntity)

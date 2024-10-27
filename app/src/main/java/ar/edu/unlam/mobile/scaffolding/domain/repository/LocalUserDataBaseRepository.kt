@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface LocalUserDataBaseRepository {
     suspend fun listUsers(): Flow<List<User>>
 
-    suspend fun createUsers(user: User)
+    suspend fun createUsers(user: User): Boolean
 }

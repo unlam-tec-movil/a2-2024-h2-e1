@@ -57,6 +57,9 @@ class LoginViewModel
         val name: State<String> = _name
         val password: State<String> = _password
         val email: State<String> = _email
+        private val _loggedState =
+            MutableStateFlow(IsLoggedUIState(MutableStateFlow(LoggedUserUIState.NotLogged).value))
+        val loggedState = _loggedState.asStateFlow()
 
         fun setPassword(password: String) {
             this._password.value = password
@@ -72,34 +75,26 @@ class LoginViewModel
 
         fun logIn() {
             viewModelScope.launch {
-                val result = userLogin.login(email = _email.value, password = _password.value)
-                if (result) {
-                    var user = getUserService.getUserData()
-                    _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
+                if (userLogin.login(email = _email.value, password = _password.value)) {
+                    if (getUserService.getUserData()) {
+                        _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
+                    }
                 }
             }
         }
 
         fun register() {
             viewModelScope.launch {
-                val result =
-                    registrationService.register(
+                if (registrationService.register(
                         email = _email.value,
                         name = _name.value,
                         password = _password.value,
                     )
-                if (result) {
-                    var user = getUserService.getUserData()
-                    _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
+                ) {
+                    if (getUserService.getUserData()) {
+                        _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
+                    }
                 }
             }
         }
-
-        private val currentLoggedState = MutableStateFlow(LoggedUserUIState.NotLogged)
-
-        private val _loggedState =
-            MutableStateFlow(
-                IsLoggedUIState(currentLoggedState.value),
-            )
-        val loggedState = _loggedState.asStateFlow()
     }

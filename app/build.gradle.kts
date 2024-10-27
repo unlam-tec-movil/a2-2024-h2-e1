@@ -67,9 +67,12 @@ dependencies {
 
     // Coil
     implementation(libs.io.coil.kt)
-    implementation(libs.androidx.room.common)
-    implementation(libs.androidx.room.ktx)
+
     implementation(libs.firebase.crashlytics)
+    implementation(libs.androidx.room.room.runtime3)
+    implementation(libs.androidx.room.room.ktx)
+    implementation(libs.androidx.androidx.room.gradle.plugin)
+    ksp(libs.androidx.room.room.compiler6)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
