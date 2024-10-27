@@ -2,9 +2,12 @@ package ar.edu.unlam.mobile.scaffolding.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -34,11 +37,28 @@ fun NewTuit() {
             modifier = Modifier.fillMaxWidth(),
             placeholder = { Text("¿Qué estás pensando?") }
         )
-        Button(
-            onClick = { /* Lógica para publicar el tuit */ },
-            modifier = Modifier.padding(top = 16.dp)
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text("Publicar Tuit")
+            Button(
+                onClick = { },
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("Guardar")
+            }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Button(
+                onClick = { },
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("Publicar Tuit")
+            }
         }
     }
 }

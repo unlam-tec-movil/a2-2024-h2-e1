@@ -67,7 +67,7 @@ fun MainScreen() {
                 HomeScreen(modifier = Modifier.padding(paddingValue),  navController = controller)
             }
             composable("new_tuit") {
-                NewTuitScreen()
+                NewTuitScreen(modifier = Modifier.padding(paddingValue),  navController = controller)
             }
         }
     }
