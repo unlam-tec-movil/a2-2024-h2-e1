@@ -18,7 +18,7 @@ fun ReplyButton(replyCount: Int, onReplyClicked: () -> Unit) {
     ) {
         Text("💬")
         Spacer(modifier = Modifier.width(4.dp))
-        Text("$replyCount replies")
+        Text("$replyCount replies") 
     }
 }
 

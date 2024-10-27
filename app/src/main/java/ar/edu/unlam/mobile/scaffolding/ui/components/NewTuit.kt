@@ -9,12 +9,17 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun NewTuit() {
+    var text by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -24,8 +29,8 @@ fun NewTuit() {
     ) {
         Text("Escribe tu nuevo tuit:")
         TextField(
-            value = "",
-            onValueChange = {},
+            value = text,
+            onValueChange = { newText -> text = newText },
             modifier = Modifier.fillMaxWidth(),
             placeholder = { Text("¿Qué estás pensando?") }
         )
