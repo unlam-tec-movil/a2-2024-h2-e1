@@ -26,6 +26,7 @@ import ar.edu.unlam.mobile.scaffolding.ui.screens.IsLoggedUIState
 import ar.edu.unlam.mobile.scaffolding.ui.screens.LoggedUserUIState
 import ar.edu.unlam.mobile.scaffolding.ui.screens.LoginScreen
 import ar.edu.unlam.mobile.scaffolding.ui.screens.LoginViewModel
+import ar.edu.unlam.mobile.scaffolding.ui.screens.ProfileScreen
 import ar.edu.unlam.mobile.scaffolding.ui.screens.RegistrationScreen
 import ar.edu.unlam.mobile.scaffolding.ui.theme.ScaffoldingV2Theme
 import dagger.hilt.android.AndroidEntryPoint
@@ -91,6 +92,10 @@ fun MainScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     composable("home") {
                         // Home es el componente en sí que es el destino de navegación.
                         HomeScreen(modifier = Modifier.padding(paddingValue))
+                    }
+                    composable("profile") {
+                        // Home es el componente en sí que es el destino de navegación.
+                        ProfileScreen(modifier = Modifier.padding(paddingValue))
                     }
                 }
             }

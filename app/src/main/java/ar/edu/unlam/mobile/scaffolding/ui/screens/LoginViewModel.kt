@@ -76,7 +76,7 @@ class LoginViewModel
         fun logIn() {
             viewModelScope.launch {
                 if (userLogin.login(email = _email.value, password = _password.value)) {
-                    if (getUserService.getUserData()) {
+                    if (getUserService.getUserData() != null) {
                         _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
                     }
                 }
@@ -91,7 +91,7 @@ class LoginViewModel
                         password = _password.value,
                     )
                 ) {
-                    if (getUserService.getUserData()) {
+                    if (getUserService.getUserData() != null) {
                         _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
                     }
                 }
