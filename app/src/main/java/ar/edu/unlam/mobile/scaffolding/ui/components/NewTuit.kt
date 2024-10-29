@@ -63,7 +63,7 @@ fun NewTuit(
                 onClick = { addTuit() },
                 modifier = Modifier.weight(1f),
             ) {
-                Text("Publicar Tuit")
+                Text("Publicar")
             }
         }
     }
