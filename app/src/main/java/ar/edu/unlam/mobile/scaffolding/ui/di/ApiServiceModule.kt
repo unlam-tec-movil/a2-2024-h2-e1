@@ -1,5 +1,7 @@
 package ar.edu.unlam.mobile.scaffolding.ui.di
 
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.PostNewTuitService
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.PostNewTuit
 import ar.edu.unlam.mobile.scaffolding.domain.user.services.GetUserService
 import ar.edu.unlam.mobile.scaffolding.domain.user.usecases.GetUserData
 import dagger.Binds
@@ -9,7 +11,10 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class GetUserServiceModule {
+abstract class ApiServiceModule {
     @Binds
     abstract fun provideGetUserService(getUserService: GetUserData): GetUserService
+
+    @Binds
+    abstract fun provideNewTuitService(newTuitService: PostNewTuit): PostNewTuitService
 }

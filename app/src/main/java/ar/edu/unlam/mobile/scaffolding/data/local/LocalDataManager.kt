@@ -4,4 +4,8 @@ interface LocalDataManager {
     fun saveLoginData(token: String)
 
     fun getLoginData(): String?
+
+    fun saveLastMessage(tuit: String): Unit
+
+    fun getLastMessage(): String?
 }

@@ -3,7 +3,7 @@ package ar.edu.unlam.mobile.scaffolding.data.network.api.dto
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import com.squareup.moshi.Json
 
-class ProfileResponseDto(
+data class ProfileResponseDto(
     @Json(name = "name")
     val name: String,
     @Json(name = "avatar_url")

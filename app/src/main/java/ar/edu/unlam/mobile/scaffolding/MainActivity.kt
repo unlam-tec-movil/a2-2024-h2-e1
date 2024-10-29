@@ -3,10 +3,11 @@ package ar.edu.unlam.mobile.scaffolding
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +27,7 @@ import ar.edu.unlam.mobile.scaffolding.ui.screens.IsLoggedUIState
 import ar.edu.unlam.mobile.scaffolding.ui.screens.LoggedUserUIState
 import ar.edu.unlam.mobile.scaffolding.ui.screens.LoginScreen
 import ar.edu.unlam.mobile.scaffolding.ui.screens.LoginViewModel
+import ar.edu.unlam.mobile.scaffolding.ui.screens.NewTuitScreen
 import ar.edu.unlam.mobile.scaffolding.ui.screens.ProfileScreen
 import ar.edu.unlam.mobile.scaffolding.ui.screens.RegistrationScreen
 import ar.edu.unlam.mobile.scaffolding.ui.theme.ScaffoldingV2Theme
@@ -79,8 +81,10 @@ fun MainScreen(viewModel: LoginViewModel = hiltViewModel()) {
             Scaffold(
                 bottomBar = { BottomBar(controller = controller) },
                 floatingActionButton = {
-                    IconButton(onClick = { controller.navigate("home") }) {
-                        Icon(Icons.Filled.Home, contentDescription = "Add")
+                    IconButton(
+                        onClick = { controller.navigate("new_tuit") },
+                    ) {
+                        Icon(Icons.Filled.Edit, contentDescription = "Agregar Tweet")
                     }
                 },
             ) { paddingValue ->
@@ -96,6 +100,11 @@ fun MainScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     composable("profile") {
                         // Home es el componente en sí que es el destino de navegación.
                         ProfileScreen(modifier = Modifier.padding(paddingValue))
+                    }
+                    composable("new_tuit") {
+                        // Home es el componente en sí que es el destino de navegación.
+
+                        NewTuitScreen(navController = controller)
                     }
                 }
             }

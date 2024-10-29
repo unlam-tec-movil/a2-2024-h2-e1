@@ -18,4 +18,19 @@ class LocalDataRepository
             }
 
         fun getLoginToken(): String? = preferencesManager.getLoginData()
+
+        fun storeLastMessage(tuit: String) =
+            try {
+                preferencesManager.saveLastMessage(tuit)
+            } catch (e: Exception) {
+                Log.e("Error", e.message.orEmpty())
+            }
+
+        fun getLastMessage(): String {
+            try {
+                return preferencesManager.getLastMessage().orEmpty()
+            } catch (e: Exception) {
+                return ""
+            }
+        }
     }
