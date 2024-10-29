@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile.scaffolding.data.network.api
 
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.FeedResponseDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LoginBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostResponseDto
@@ -11,6 +12,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface NotTwitterApiClient {
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
@@ -38,10 +40,14 @@ interface NotTwitterApiClient {
         @Body body: NewPostBodyDto,
     ): NewPostResponseDto
 
-    /* @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
-        @GET("me/feed?page=1")
-        suspend fun getFeed(): ResponseBody
+    @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
+    @GET("me/feed?")
+    suspend fun getFeed(
+        @Query("page") page: Int,
+        @Header("Authorization") token: String,
+    ): List<FeedResponseDto>
 
+        /*
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
     @POST("me/tuits/:tuitID/likes")
     suspend fun addLike(): ResponseBody
@@ -49,5 +55,5 @@ interface NotTwitterApiClient {
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
     @DELETE("me/tuits/:tuitID/likes")
     suspend fun addLike(): ResponseBody
-     */
+         */
 }
