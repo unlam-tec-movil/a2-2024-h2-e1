@@ -1,7 +1,8 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
-import androidx.activity.compose.setContent
+import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -30,9 +31,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import android.os.Bundle
 import ar.edu.unlam.mobile.scaffolding.R.drawable
 
 class DetailsScreen : ComponentActivity() {
@@ -78,7 +77,7 @@ fun Imagenes() {
 }
 
 @Composable
-fun NombreUsuario()  {
+fun NombreUsuario() {
     Text(
         text = "Username",
         modifier =
@@ -92,7 +91,7 @@ fun NombreUsuario()  {
 }
 
 @Composable
-fun StatsBar()  {
+fun StatsBar() {
     Row(
         modifier =
             Modifier
@@ -124,7 +123,7 @@ fun StatsBar()  {
 }
 
 @Composable
-fun ProfileButtons(onClick: () -> Unit)  {
+fun ProfileButtons(onClick: () -> Unit) {
     Row(
         modifier =
             Modifier
@@ -186,10 +185,4 @@ fun ProfileBotBar(onClick: () -> Unit) {
             Icon(Icons.Filled.Email, "Fl")
         }
     }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun previewTextos()  {
-    ProfileView()
-}
+} 
