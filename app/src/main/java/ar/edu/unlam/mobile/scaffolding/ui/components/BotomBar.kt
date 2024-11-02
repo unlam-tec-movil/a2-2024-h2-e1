@@ -3,7 +3,6 @@ package ar.edu.unlam.mobile.scaffolding.ui.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -45,11 +44,9 @@ fun BottomBar(controller: NavHostController) {
     }
 }
 
-
 @Preview
 @Composable
 fun BottomBarPreview() {
     val previewController = rememberNavController() // Inicializa el controlador temporal
     BottomBar(controller = previewController)
 }
-
