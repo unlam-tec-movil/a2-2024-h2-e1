@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ScaffoldingV2</string>
+    <string name="nombre">Nombre</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="enviar">Enviar</string>
+    <string name="correo">Correo</string>
+    <string name="registrarse">REGISTRARSE</string>
 </resources>
