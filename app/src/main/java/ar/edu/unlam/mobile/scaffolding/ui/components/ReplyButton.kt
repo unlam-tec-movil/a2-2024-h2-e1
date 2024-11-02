@@ -15,22 +15,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ReplyButton(replyCount: Int, onReplyClicked: () -> Unit) {
+fun ReplyButton(
+    replyCount: Int,
+    onReplyClicked: () -> Unit,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable { onReplyClicked() }
+        modifier = Modifier.clickable { onReplyClicked() },
     ) {
         Icon(Icons.AutoMirrored.Filled.Comment, "Comment")
         Spacer(modifier = Modifier.width(4.dp))
-        Text("$replyCount replies") 
+        Text("$replyCount replies")
     }
 }
 
 @Preview
 @Composable
-fun ReplyButtonPreview(){
+fun ReplyButtonPreview() {
     ReplyButton(
         replyCount = 5,
-        onReplyClicked = { println("Reply button clicked!") }
+        onReplyClicked = { println("Reply button clicked!") },
     )
 }
