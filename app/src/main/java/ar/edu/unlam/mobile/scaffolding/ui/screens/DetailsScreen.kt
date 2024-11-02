@@ -170,14 +170,12 @@ fun ProfileBotBar(onClick: () -> Unit) {
         ) {
             Icon(Icons.Filled.Add, "Floating action button.")
         }
-
         FloatingActionButton(
             onClick = { onClick() },
             modifier = Modifier.weight(1f),
         ) {
             Icon(Icons.Filled.Add, "Floating action button.")
         }
-
         FloatingActionButton(
             onClick = { onClick() },
             modifier = Modifier.weight(1f),
