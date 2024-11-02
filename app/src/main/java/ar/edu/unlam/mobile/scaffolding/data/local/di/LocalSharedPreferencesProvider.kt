@@ -21,6 +21,7 @@ object LocalSharedPreferencesProvider {
     ): SharedPreferences = applicationContext.getSharedPreferences("preferences", Context.MODE_PRIVATE)
 
     @Provides
+    @Singleton
     fun providePreferencesManager(sharedPreferences: SharedPreferences): LocalDataManager =
         LocalDataManagerImplementation(sharedPreferences)
 }

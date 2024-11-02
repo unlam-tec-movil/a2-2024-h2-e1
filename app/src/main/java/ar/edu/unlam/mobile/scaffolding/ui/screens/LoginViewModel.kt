@@ -54,9 +54,11 @@ class LoginViewModel
         private val _email = mutableStateOf("")
         private val _password = mutableStateOf("")
         private val _name = mutableStateOf("")
+
         val name: State<String> = _name
         val password: State<String> = _password
         val email: State<String> = _email
+
         private val _loggedState =
             MutableStateFlow(IsLoggedUIState(MutableStateFlow(LoggedUserUIState.NotLogged).value))
         val loggedState = _loggedState.asStateFlow()
