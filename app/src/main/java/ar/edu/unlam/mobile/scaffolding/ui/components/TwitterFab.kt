@@ -10,7 +10,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -19,19 +18,12 @@ fun TwitterFAB() {
         onClick = { /* TODO */ },
         modifier = Modifier.size(56.dp),
         shape = CircleShape,
-        containerColor = MaterialTheme.colorScheme.primary
+        containerColor = MaterialTheme.colorScheme.primary,
     ) {
         Icon(
             Icons.Default.Add,
             contentDescription = "New Tweet",
-            tint = Color.White
+            tint = Color.White,
         )
     }
 }
-
-@Preview
-@Composable
-fun TwitterFABPreview(){
-    TwitterFAB()
-}
-

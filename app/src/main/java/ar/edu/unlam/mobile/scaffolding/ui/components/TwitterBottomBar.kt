@@ -12,14 +12,13 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun TwitterBottomBar() {
     BottomAppBar {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Icon(Icons.Default.Home, "Home")
             Icon(Icons.Default.Search, "Search")
@@ -27,10 +26,4 @@ fun TwitterBottomBar() {
             Icon(Icons.Default.Email, "Messages")
         }
     }
-}
-
-@Preview
-@Composable
-fun TwitterBottomBarPreview(){
-    TwitterBottomBar()
 }
