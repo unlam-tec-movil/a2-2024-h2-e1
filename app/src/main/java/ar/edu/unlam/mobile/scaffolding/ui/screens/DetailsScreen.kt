@@ -1,17 +1,13 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
@@ -36,153 +32,164 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
+import android.os.Bundle
 import ar.edu.unlam.mobile.scaffolding.R.drawable
 
-
-class DetailsScreen : ComponentActivity(){
+class DetailsScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent{
+        setContent {
             ProfileView()
         }
     }
 }
+
 @Composable
-fun ProfileView(){
-Column() {
-    Box(){ProfileTopBar()}
-    Box(){ProfileTuitList()}
-    Box(modifier = Modifier.wrapContentHeight(Alignment.Bottom).padding(bottom = 40.dp)){ProfileBotBar {  }}
-}
-}
-@Composable
-fun ProfileTopBar(){
-    Column(modifier = Modifier.background(Color.White).padding(2.dp)) {
-        Box(){Imagenes()}
-        Box(){NombreUsuario()}
-        Box(){StatsBar()}
-        Box(){ProfileButtons {  }}
+fun ProfileView() {
+    Column {
+        Box { ProfileTopBar() }
+        Box { ProfileTuitList() }
+        Box(modifier = Modifier.wrapContentHeight(Alignment.Bottom).padding(bottom = 40.dp)) { ProfileBotBar { } }
     }
 }
 
 @Composable
-fun Imagenes(){
-    Image(
-        painterResource(drawable.ic_launcher_foreground),"una imagen random",
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentSize(Alignment.Center)
-            .clip(CircleShape)
-            .background(Color.Gray)
+fun ProfileTopBar() {
+    Column(modifier = Modifier.background(Color.White).padding(2.dp)) {
+        Box { Imagenes() }
+        Box { NombreUsuario() }
+        Box { StatsBar() }
+        Box { ProfileButtons { } }
+    }
+}
 
+@Composable
+fun Imagenes() {
+    Image(
+        painterResource(drawable.ic_launcher_foreground),
+        "una imagen random",
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .wrapContentSize(Alignment.Center)
+                .clip(CircleShape)
+                .background(Color.Gray),
     )
 }
 
 @Composable
-fun NombreUsuario(){
-        Text(
-            text = "Username",
-            modifier = Modifier.padding(20.dp)
+fun NombreUsuario()  {
+    Text(
+        text = "Username",
+        modifier =
+            Modifier
+                .padding(20.dp)
                 .fillMaxWidth()
                 .wrapContentSize(Alignment.Center)
                 .background(Color.Gray)
-                .padding(10.dp)
-        )
+                .padding(10.dp),
+    )
 }
-@Composable
-fun StatsBar(){
-    Row (modifier = Modifier.fillMaxWidth()
 
-        .padding(bottom = 15.dp)
+@Composable
+fun StatsBar()  {
+    Row(
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(bottom = 15.dp),
     ) {
         Text(
-            text="Seguidores",
-            modifier = Modifier.wrapContentSize(Alignment.Center)
-                .padding(start = 50.dp)
+            text = "Seguidores",
+            modifier =
+                Modifier
+                    .wrapContentSize(Alignment.Center)
+                    .padding(start = 50.dp),
         )
         Text(
-            text="Seguidos",
-            modifier = Modifier.wrapContentSize(Alignment.Center)
-                .padding(start = 50.dp)
+            text = "Seguidos",
+            modifier =
+                Modifier
+                    .wrapContentSize(Alignment.Center)
+                    .padding(start = 50.dp),
         )
         Text(
-            text="Tuits",
-            modifier = Modifier.wrapContentSize(Alignment.Center)
-                .padding(start = 50.dp)
+            text = "Tuits",
+            modifier =
+                Modifier
+                    .wrapContentSize(Alignment.Center)
+                    .padding(start = 50.dp),
         )
-
     }
 }
 
 @Composable
-fun ProfileButtons(onClick: () -> Unit ){
-    Row(modifier = Modifier.fillMaxWidth()
-        .wrapContentSize(Alignment.Center)
-    ){
-        Button(onClick = { onClick() }){
+fun ProfileButtons(onClick: () -> Unit)  {
+    Row(
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .wrapContentSize(Alignment.Center),
+    ) {
+        Button(onClick = { onClick() }) {
             Text("Seguir")
         }
-        Button(onClick = { onClick() }){
+        Button(onClick = { onClick() }) {
             Text("Compartir")
         }
-        Button(onClick = { onClick() }){
+        Button(onClick = { onClick() }) {
             Text("Mensaje")
         }
-
     }
 }
 
 @Composable
 fun ProfileTuitList() {
     Card(
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        ),
-        modifier = Modifier.fillMaxWidth().padding(bottom= 400.dp)
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+            ),
+        modifier = Modifier.fillMaxWidth().padding(bottom = 400.dp),
     ) {
         Text(
             text = "Filled",
-            modifier = Modifier
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .padding(16.dp),
             textAlign = TextAlign.Center,
         )
     }
-
-
 }
 
 @Composable
 fun ProfileBotBar(onClick: () -> Unit) {
-    Row(modifier = Modifier.fillMaxWidth().wrapContentWidth() ){
-
-
-            FloatingActionButton(
-                onClick = { onClick() },modifier = Modifier.weight(1f)
-            ) {
-                Icon(Icons.Filled.Add, "Floating action button.",)
-            }
-
+    Row(modifier = Modifier.fillMaxWidth().wrapContentWidth()) {
         FloatingActionButton(
-            onClick = { onClick() },modifier = Modifier.weight(1f)
+            onClick = { onClick() },
+            modifier = Modifier.weight(1f),
         ) {
             Icon(Icons.Filled.Add, "Floating action button.")
         }
 
         FloatingActionButton(
-            onClick = { onClick() }, modifier = Modifier.weight(1f)
+            onClick = { onClick() },
+            modifier = Modifier.weight(1f),
         ) {
-            Icon(Icons.Filled.Email, "Fl",)
+            Icon(Icons.Filled.Add, "Floating action button.")
         }
 
+        FloatingActionButton(
+            onClick = { onClick() },
+            modifier = Modifier.weight(1f),
+        ) {
+            Icon(Icons.Filled.Email, "Fl")
+        }
     }
 }
 
-
 @Preview(showSystemUi = true)
 @Composable
-fun previewTextos(){
+fun previewTextos()  {
     ProfileView()
 }
-
-

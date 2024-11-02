@@ -21,7 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ar.edu.unlam.mobile.scaffolding.ui.components.BottomBar
-import ar.edu.unlam.mobile.scaffolding.ui.screens.HomeScreen
+import ar.edu.unlam.mobile.scaffolding.ui.screens.Homescreen
 import ar.edu.unlam.mobile.scaffolding.ui.screens.IsLoggedUIState
 import ar.edu.unlam.mobile.scaffolding.ui.screens.LoggedUserUIState
 import ar.edu.unlam.mobile.scaffolding.ui.screens.LoginScreen
@@ -94,7 +94,8 @@ fun MainScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     // Por parámetro recibe la ruta que se utilizará para navegar a dicho destino.
                     composable("home") {
                         // Home es el componente en sí que es el destino de navegación.
-                        HomeScreen(modifier = Modifier.padding(paddingValue))
+                        @Suppress("ktlint:standard:comment-wrapping")
+                        Homescreen( /*modifier = Modifier.padding(paddingValue)*/)
                     }
                     composable("profile") {
                         // Home es el componente en sí que es el destino de navegación.
