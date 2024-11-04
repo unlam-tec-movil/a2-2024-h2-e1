@@ -1,0 +1,7 @@
+package ar.edu.unlam.mobile.scaffolding.domain.tuit.services
+
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
+
+interface GetFeedService {
+    suspend fun getFeed(page: Int): List<Tuit>?
+}

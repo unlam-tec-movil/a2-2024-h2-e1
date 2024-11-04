@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.kover)
     alias(libs.plugins.ktlint)
     alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.firebase.crashlytics)
 }
 
 android {
@@ -62,9 +64,15 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-
+    implementation(libs.androidx.material.icons.extended)
     // Coil
     implementation(libs.io.coil.kt)
+
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.androidx.room.room.runtime3)
+    implementation(libs.androidx.room.room.ktx)
+    implementation(libs.androidx.androidx.room.gradle.plugin)
+    ksp(libs.androidx.room.room.compiler6)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -81,4 +89,8 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     androidTestImplementation(libs.google.dagger.hilt.android.testing)
     testImplementation(libs.google.dagger.hilt.android.testing)
+
+    // retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
 }

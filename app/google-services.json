@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "485445455205",
+    "project_id": "whispify-30c56",
+    "storage_bucket": "whispify-30c56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485445455205:android:7dfca2317f8ff5fb20e58c",
+        "android_client_info": {
+          "package_name": "ar.edu.unlam.mobile.scaffolding"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH2jqd4CwalJx_gWwVxMF2aQFrZZi5zN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485445455205:android:59a1d39c4cead4ec20e58c",
+        "android_client_info": {
+          "package_name": "com.unlam.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH2jqd4CwalJx_gWwVxMF2aQFrZZi5zN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
