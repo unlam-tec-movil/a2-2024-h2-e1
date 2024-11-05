@@ -6,6 +6,7 @@ import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LoginBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.RegisterBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.toDomain
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.TuitResponseDto
 import ar.edu.unlam.mobile.scaffolding.domain.login.models.LoggedUserToken
 import ar.edu.unlam.mobile.scaffolding.domain.models.ApiResponseMessage
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
@@ -82,4 +83,25 @@ class ApiRepository
                 return null
             }
         }
+/*
+    suspend fun likePost(postId: Int, token: String): ApiResponseMessage {
+        return try {
+            val response = api.likePost(postId, "Bearer $token")
+            response.toDomain()
+        } catch (e: Exception) {
+            Log.e("Error", e.message.orEmpty())
+            ApiResponseMessage(e.message.orEmpty(), 0)
+        }
     }
+    suspend fun unlikePost(postId: Int, token: String): ApiResponseMessage {
+        return try {
+            val response = api.unlikePost(postId, "Bearer $token")
+            response.toDomain()
+        } catch (e: Exception) {
+            Log.e("Error", e.message.orEmpty())
+            ApiResponseMessage(e.message.orEmpty(), 0)
+        }
+    }
+ */
+
+}
