@@ -23,6 +23,7 @@ fun TuitFeed(
     tuits: List<Tuit>,
     likeEvent: (id: Int) -> Unit,
 
+
 ) {
 
     Surface(
@@ -51,3 +52,21 @@ fun TuitFeed(
         }
     }
 }
+@Composable
+fun TuitProfile(
+    tuits: List<Tuit>,
+    likeEvent: (id: Int) -> Unit,
+
+
+    ) {
+
+
+            var modifier = Modifier.fillMaxSize()
+
+            LazyColumn(modifier.padding(top = 10.dp)) {
+
+                items(tuits) { tuit ->
+                    TuitCard(likePost = likeEvent, tuit = tuit, modifier = Modifier.padding(1.dp))
+                }
+            }
+        }

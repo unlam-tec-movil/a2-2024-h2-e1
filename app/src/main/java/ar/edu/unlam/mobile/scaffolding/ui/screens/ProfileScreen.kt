@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.unlam.mobile.scaffolding.ui.components.Loader
+import ar.edu.unlam.mobile.scaffolding.ui.components.TuitFeed
 import ar.edu.unlam.mobile.scaffolding.ui.components.UserDetails
 
 @Composable
@@ -19,6 +20,7 @@ fun ProfileScreen(
     when (val profileData = logState.profileState) {
         is ProfilePopulationState.Success -> {
             UserDetails(profileData.user)
+            
         }
 
         is ProfilePopulationState.Loading -> {

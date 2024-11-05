@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -25,13 +26,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import coil.compose.AsyncImage
 
 @Composable
-fun UserDetails(user: User) {
-    ProfileTopBar(user)
-    // ProfileTuitList()
+fun UserDetails(user: User, /*tuits: List<Tuit>, likeEvent: (id: Int) -> Unit*/) {
+    LazyColumn {
+        item { ProfileHeader(user) }
+        /*item { TuitProfile(tuits = tuits, likeEvent = likeEvent) }*/
+    }
 }
 
 @Composable

@@ -30,7 +30,8 @@ data class PostUiState(
 )
 
 @HiltViewModel
-class NewTuitViewModel
+class
+NewTuitViewModel
     @Inject
     constructor(
         private val postNewTuitService: PostNewTuitService,
