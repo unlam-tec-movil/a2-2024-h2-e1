@@ -9,5 +9,5 @@ data class Tuit(
     val likes: Int,
     val liked: Boolean,
     val date: String,
-    val comentarios: List<Comment>
+    val comentarios: List<Comment>,
 )

@@ -96,13 +96,13 @@ fun BottomOptions(
             Icon(Icons.Outlined.FavoriteBorder, contentDescription = "like")
         }
         Button(
-            onClick = {  },
+            onClick = { },
         ) {
             Icon(Icons.Outlined.Email, contentDescription = "comments")
         }
 
         Button(
-            onClick = {  },
+            onClick = { },
         ) {
             Icon(Icons.Outlined.Share, contentDescription = "share")
         }
