@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -92,6 +94,17 @@ fun BottomOptions(
             onClick = { like(tuit.id) },
         ) {
             Icon(Icons.Outlined.FavoriteBorder, contentDescription = "like")
+        }
+        Button(
+            onClick = {  },
+        ) {
+            Icon(Icons.Outlined.Email, contentDescription = "comments")
+        }
+
+        Button(
+            onClick = {  },
+        ) {
+            Icon(Icons.Outlined.Share, contentDescription = "share")
         }
     }
 }
