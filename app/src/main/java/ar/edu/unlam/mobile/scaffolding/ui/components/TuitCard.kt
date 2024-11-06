@@ -64,7 +64,7 @@ fun Header(tuit: Tuit) {
                 AsyncImage(
                     contentDescription = "profile picture",
                     contentScale = ContentScale.Crop,
-                    model = tuit.avatar_url,
+                    model = tuit.avatarUrl,
                     modifier =
                         Modifier
                             .clip(CircleShape)

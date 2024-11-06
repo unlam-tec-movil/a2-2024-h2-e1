@@ -4,7 +4,7 @@ import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import com.squareup.moshi.Json
 import javax.inject.Inject
 
-data class FeedResponseDto
+data class TuitResponseDTO
     @Inject
     constructor(
         @Json(name = "id")
@@ -12,11 +12,11 @@ data class FeedResponseDto
         @Json(name = "message")
         val message: String,
         @Json(name = "parent_id")
-        val parent_id: Int,
+        val parentId: Int,
         @Json(name = "author")
         val author: String,
         @Json(name = "avatar_url")
-        val avatar_url: String,
+        val avatarUrl: String,
         @Json(name = "likes")
         val likes: Int,
         @Json(name = "liked")
@@ -25,13 +25,13 @@ data class FeedResponseDto
         val date: String,
     )
 
-fun FeedResponseDto.toDomain(): Tuit =
+fun TuitResponseDTO.toDomain(): Tuit =
     Tuit(
         id = this.id,
         message = this.message,
-        parent_id = this.parent_id,
+        parentId = this.parentId,
         author = this.author,
-        avatar_url = this.avatar_url,
+        avatarUrl = this.avatarUrl,
         likes = this.likes,
         liked = this.liked,
         date = this.date,

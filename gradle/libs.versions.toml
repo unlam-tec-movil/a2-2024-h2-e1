@@ -26,6 +26,7 @@ roomKtxVersion = "2.7.0-alpha10"
 roomRuntime = "2.7.0-alpha10"
 common = "1.1.1"
 androidxRoomGradlePlugin = "2.7.0-alpha10"
+secretsGradleVersion = "2.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

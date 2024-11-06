@@ -1,12 +1,13 @@
 package ar.edu.unlam.mobile.scaffolding.data.network.api
 
-import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.FeedResponseDto
+import ar.edu.unlam.mobile.scaffolding.BuildConfig
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LoginBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostResponseDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.ProfileResponseDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.RegisterBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.TokenResponseDto
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.TuitResponseDTO
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -15,7 +16,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface NotTwitterApiClient {
-    @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
+    @Headers("Application-Token: ${BuildConfig.API_KEY}")
     @POST("login")
     suspend fun logInUser(
         @Body body: LoginBodyDto,
@@ -45,7 +46,7 @@ interface NotTwitterApiClient {
     suspend fun getFeed(
         @Query("page") page: Int,
         @Header("Authorization") token: String,
-    ): List<FeedResponseDto>
+    ): List<TuitResponseDTO>
 
         /*
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
