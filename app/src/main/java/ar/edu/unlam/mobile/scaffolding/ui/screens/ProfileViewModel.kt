@@ -49,16 +49,29 @@ class ProfileViewModel
 
         init {
             viewModelScope.launch {
+
                 val user = getUserService.getUserData()
                 val tuits = feedService.getFeed(1)
 
+                if (user!= null){
+                    // Obtener los tuits filtrados por el correo del usuario
+                    Log.d("ProfileViewModel", "User data: $user")
+                    val tuits = feedService.getUserTuitsByEmail(user.name)
 
-                if (user != null && tuits != null) {
-                    _fetchUserState.value = ProfileUiState(ProfilePopulationState.Success(user, tuits))
+                    if (tuits != null) {
+                        // Si se encuentran los tuits, actualizamos el estado
+                        _fetchUserState.value = ProfileUiState(ProfilePopulationState.Success(user, tuits))
+                    } else {
+                        // Si no se encuentran tuits, mostramos un error
+                        Log.d("ProfileViewModel", "Error: No user data found")
+                        _fetchUserState.value = ProfileUiState(ProfilePopulationState.Error("Error al cargar tuits"))
+                    }
                 } else {
-                    _fetchUserState.value = ProfileUiState(ProfilePopulationState.Error("Error al cargar perfil y tuits"))
+                    // Si no se encuentra el usuario, mostramos un error
+                    _fetchUserState.value = ProfileUiState(ProfilePopulationState.Error("Error al cargar perfil"))
                 }
             }
-            }
         }
+}
+
 

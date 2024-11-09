@@ -11,6 +11,12 @@ interface LocalUserDao {
     @Query("SELECT * FROM users")
     fun listUsers(): Flow<List<LocalUserEntity>>
 
-    @Insert
-    suspend fun createUser(android: LocalUserEntity)
-}
+
+
+       /* @Query("SELECT * FROM users WHERE email = :email")
+        fun getUserByEmail(email: String): Flow<LocalUserEntity>*/
+
+        @Insert
+        suspend fun createUser(android: LocalUserEntity)
+    }
+

@@ -22,9 +22,13 @@ fun ProfileScreen(
         is ProfilePopulationState.Success -> {
             Column (modifier = modifier){
             UserDetails(profileData.user)
-                profileData.tuits?.let { TuitFeed(tuits = it,likeEvent = { viewModel.likeButtonPressed(it) }) }
+                profileData.tuits?.let { tuits ->
+                    TuitFeed(
+                        tuits = tuits,
+                        likeEvent = { tuitId -> viewModel.likeButtonPressed(tuitId) }
+                    ) }
             }
-            
+
         }
 
         is ProfilePopulationState.Loading -> {

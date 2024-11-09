@@ -7,4 +7,7 @@ interface TuitRepository {
     fun getTuits(): Flow<List<Tuit>>
 
     fun createTuit(tuit: Tuit)
+
+    suspend fun getUserTuitsByEmail(email: String, token: String): List<Tuit>
+
 }
