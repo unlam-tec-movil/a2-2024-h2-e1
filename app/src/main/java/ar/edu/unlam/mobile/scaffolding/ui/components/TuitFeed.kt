@@ -22,29 +22,24 @@ import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 fun TuitFeed(
     tuits: List<Tuit>,
     likeEvent: (id: Int) -> Unit,
-
-
 ) {
-
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.background,
     ) {
         Column {
-            // Top Bar
             TopAppBar(
                 title = { Text("Twitter Unlam") },
                 modifier = Modifier.fillMaxWidth(),
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
+                colors =
+                    TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.surface,
+                    ),
             )
             var modifier = Modifier.fillMaxSize()
 
             LazyColumn(modifier.padding(top = 10.dp)) {
-                item {
-                    TweetComposer()
-                }
+                // item { TweetComposer() }
                 items(tuits) { tuit ->
                     TuitCard(likePost = likeEvent, tuit = tuit, modifier = Modifier.padding(1.dp))
                 }
@@ -52,21 +47,17 @@ fun TuitFeed(
         }
     }
 }
+
 @Composable
 fun TuitProfile(
     tuits: List<Tuit>,
     likeEvent: (id: Int) -> Unit,
+) {
+    var modifier = Modifier.fillMaxSize()
 
-
-    ) {
-
-
-            var modifier = Modifier.fillMaxSize()
-
-            LazyColumn(modifier.padding(top = 10.dp)) {
-
-                items(tuits) { tuit ->
-                    TuitCard(likePost = likeEvent, tuit = tuit, modifier = Modifier.padding(1.dp))
-                }
-            }
+    LazyColumn(modifier.padding(top = 10.dp)) {
+        items(tuits) { tuit ->
+            TuitCard(likePost = likeEvent, tuit = tuit, modifier = Modifier.padding(1.dp))
         }
+    }
+}
