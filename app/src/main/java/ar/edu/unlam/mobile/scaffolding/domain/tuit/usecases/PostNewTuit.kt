@@ -31,4 +31,11 @@ class PostNewTuit
         }
 
         override suspend fun getLastTuitFromLocalData(): String = localData.getLastMessage()
+        override suspend fun likePost(postId: Int): ApiResponseMessage {
+        TODO("Not yet implemented")
     }
+
+    override suspend fun unlikePost(postId: Int): ApiResponseMessage {
+        TODO("Not yet implemented")
+    }
+}

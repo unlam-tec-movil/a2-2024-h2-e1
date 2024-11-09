@@ -1,10 +1,12 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
+import android.util.Log
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.PostNewTuitService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,10 +25,14 @@ sealed interface PostTuitResultState {
     data class Error(
         val message: String,
     ) : PostTuitResultState
+
+    data class Liked(val postId: Int) : PostTuitResultState
+    data class Unliked(val postId: Int) : PostTuitResultState
 }
 
 data class PostUiState(
     val resultState: PostTuitResultState,
+
 )
 
 @HiltViewModel
@@ -69,4 +75,42 @@ class NewTuitViewModel
                 }
             }
         }
+
+        // Método para dar like a un tuit
+        // Función para "like" un tuit
+        fun likePost(postId: Int) {
+            viewModelScope.launch {
+                try {
+                    val result = postNewTuitService.likePost(postId) // Lógica de like
+                    if (result.status == 0) {
+                        _postUIState.value = PostUiState(PostTuitResultState.Error(result.message))
+                    } else {
+                        // Actualiza el estado con el postId que se ha dado like
+                        _postUIState.value = PostUiState(PostTuitResultState.Liked(postId))
+                    }
+                } catch (e: Exception) {
+                    Log.e("Error", e.message.orEmpty())
+                    _postUIState.value = PostUiState(PostTuitResultState.Error(e.message.orEmpty()))
+                }
+            }
+        }
+
+        // Función para "unlike" un tuit
+        fun unlikePost(postId: Int) {
+            viewModelScope.launch {
+                try {
+                    val result = postNewTuitService.unlikePost(postId) // Lógica de unlike
+                    if (result.status == 0) {
+                        _postUIState.value = PostUiState(PostTuitResultState.Error(result.message))
+                    } else {
+                        // Actualiza el estado con el postId que se ha dado unlike
+                        _postUIState.value = PostUiState(PostTuitResultState.Unliked(postId))
+                    }
+                } catch (e: Exception) {
+                    Log.e("Error", e.message.orEmpty())
+                    _postUIState.value = PostUiState(PostTuitResultState.Error(e.message.orEmpty()))
+                }
+            }
+        }
+
     }

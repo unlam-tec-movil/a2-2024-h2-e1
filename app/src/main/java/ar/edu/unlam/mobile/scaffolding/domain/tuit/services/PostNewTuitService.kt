@@ -8,4 +8,8 @@ interface PostNewTuitService {
     suspend fun addPostToLocalData(tuit: String): Unit
 
     suspend fun getLastTuitFromLocalData(): String
+
+    suspend fun likePost(postId: Int): ApiResponseMessage
+
+    suspend fun unlikePost(postId: Int): ApiResponseMessage
 }

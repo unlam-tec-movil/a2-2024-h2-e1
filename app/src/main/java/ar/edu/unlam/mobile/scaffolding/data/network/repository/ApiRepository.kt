@@ -83,10 +83,10 @@ class ApiRepository
                 return null
             }
         }
-/*
+
     suspend fun likePost(postId: Int, token: String): ApiResponseMessage {
         return try {
-            val response = api.likePost(postId, "Bearer $token")
+            val response = api.likePost(postId, token)
             response.toDomain()
         } catch (e: Exception) {
             Log.e("Error", e.message.orEmpty())
@@ -95,13 +95,19 @@ class ApiRepository
     }
     suspend fun unlikePost(postId: Int, token: String): ApiResponseMessage {
         return try {
-            val response = api.unlikePost(postId, "Bearer $token")
+            val response = api.unlikePost(postId, token)
             response.toDomain()
         } catch (e: Exception) {
             Log.e("Error", e.message.orEmpty())
             ApiResponseMessage(e.message.orEmpty(), 0)
         }
     }
- */
+
+
 
 }
+
+
+
+
+
