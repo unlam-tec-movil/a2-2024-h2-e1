@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -19,7 +20,10 @@ fun ProfileScreen(
 
     when (val profileData = logState.profileState) {
         is ProfilePopulationState.Success -> {
+            Column (modifier = modifier){
             UserDetails(profileData.user)
+                profileData.tuits?.let { TuitFeed(tuits = it,likeEvent = { viewModel.likeButtonPressed(it) }) }
+            }
             
         }
 
