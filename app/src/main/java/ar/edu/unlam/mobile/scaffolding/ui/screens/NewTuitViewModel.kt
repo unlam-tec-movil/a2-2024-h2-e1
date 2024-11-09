@@ -6,6 +6,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.unlam.mobile.scaffolding.data.network.repository.ApiRepository
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.PostNewTuitService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,6 +41,7 @@ class NewTuitViewModel
     @Inject
     constructor(
         private val postNewTuitService: PostNewTuitService,
+        private val apiRepository: ApiRepository
     ) : ViewModel() {
         private val _message = mutableStateOf("")
         val message: State<String> = _message
@@ -76,8 +78,26 @@ class NewTuitViewModel
             }
         }
 
-        // Método para dar like a un tuit
+
         // Función para "like" un tuit
+        fun likePost(postId: Int) {
+            viewModelScope.launch {
+                try {
+                    val result = apiRepository.likePost(postId, "token")
+                  //  if (result.status == 0) {
+                  //      _postUIState.value = PostUiState(PostTuitResultState.Error(result.message))
+                //    } else {
+                        // Actualiza el estado local del Tuit
+                        // ... (aquí actualizarías el estado local de tu lista de tuits)
+                        _postUIState.value = PostUiState(PostTuitResultState.Liked(postId))
+                 //   }
+                } catch (e: Exception) {
+                    Log.e("Error", e.message.orEmpty())
+                    _postUIState.value = PostUiState(PostTuitResultState.Error(e.message.orEmpty()))
+                }
+            }
+        }
+    /*
         fun likePost(postId: Int) {
             viewModelScope.launch {
                 try {
@@ -95,7 +115,27 @@ class NewTuitViewModel
             }
         }
 
+     */
+
         // Función para "unlike" un tuit
+        fun unlikePost(postId: Int) {
+            viewModelScope.launch {
+                try {
+                    val result = apiRepository.unlikePost(postId, "token")
+                    if (result.status == 0) {
+                        _postUIState.value = PostUiState(PostTuitResultState.Error(result.message))
+                    } else {
+                        // Actualiza el estado local del Tuit
+                        // ... (aquí actualizarías el estado local de tu lista de tuits)
+                        _postUIState.value = PostUiState(PostTuitResultState.Unliked(postId))
+                    }
+                } catch (e: Exception) {
+                    Log.e("Error", e.message.orEmpty())
+                    _postUIState.value = PostUiState(PostTuitResultState.Error(e.message.orEmpty()))
+                }
+            }
+        }
+/*
         fun unlikePost(postId: Int) {
             viewModelScope.launch {
                 try {
@@ -112,5 +152,10 @@ class NewTuitViewModel
                 }
             }
         }
+
+ */
+
+
+
 
     }

@@ -9,6 +9,7 @@ import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.toDomain
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.TuitResponseDto
 import ar.edu.unlam.mobile.scaffolding.domain.login.models.LoggedUserToken
 import ar.edu.unlam.mobile.scaffolding.domain.models.ApiResponseMessage
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Like
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import javax.inject.Inject
@@ -84,13 +85,14 @@ class ApiRepository
             }
         }
 
-    suspend fun likePost(postId: Int, token: String): ApiResponseMessage {
+    suspend fun likePost(postId: Int, token: String): Like? {
         return try {
             val response = api.likePost(postId, token)
             response.toDomain()
         } catch (e: Exception) {
             Log.e("Error", e.message.orEmpty())
-            ApiResponseMessage(e.message.orEmpty(), 0)
+            return null
+           // ApiResponseMessage(e.message.orEmpty(), 0)
         }
     }
     suspend fun unlikePost(postId: Int, token: String): ApiResponseMessage {

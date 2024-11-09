@@ -1,6 +1,7 @@
 package ar.edu.unlam.mobile.scaffolding.data.network.api
 
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.FeedResponseDto
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LikeDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LoginBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostResponseDto
@@ -8,6 +9,7 @@ import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.ProfileResponseDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.RegisterBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.TokenResponseDto
 import ar.edu.unlam.mobile.scaffolding.domain.models.ApiResponseMessage
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Like
 import okhttp3.ResponseBody
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -15,6 +17,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NotTwitterApiClient {
@@ -53,14 +56,17 @@ interface NotTwitterApiClient {
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
     @POST("me/tuits/:tuitID/likes")
     suspend fun likePost(
-        @Query("page") postId: Int,
+        @Path("postID") postId: Int,
         @Header("Authorization") token: String,
-        ): NewPostResponseDto
+        ): LikeDto
+
 
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
     @DELETE("me/tuits/:tuitID/likes")
-    suspend fun unlikePost(postId: Int, s: String): NewPostResponseDto
-
+    suspend fun unlikePost(
+        @Path("tuitID") postId: Int,
+        @Header("Authorization") token: String
+    ): NewPostResponseDto
 
 }
 
@@ -68,7 +74,9 @@ interface NotTwitterApiClient {
 /*
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
     @POST("me/tuits/:tuitID/likes")
-    suspend fun likePost(postId: Int, s: String): ApiResponseMessage
+    suspend fun likePost(
+        @Path("tuitID") postId: Int,
+        @Header("Authorization") token: String,
+        ): NewPostResponseDto
  */
 
-// suspend fun unlikePost(postId: Int, s: String): ResponseBody

@@ -48,47 +48,33 @@ fun TuitCard(
             Column {
                 Row {
                     Text(tuit.message, fontSize = 24.sp)
-                    Button(
-                        onClick = {
-                            if (tuit.liked) {
-                                viewModel.unlikePost(tuit.id)
-                            } else {
-                                viewModel.likePost(tuit.id)
-                            }
-                        }
-                    ) {
-                        Text(text = if (tuit.liked) "Unlike" else "Like")
-                    }
+
                 }
             }
         }
         BottomOptions(tuit, like = likePost, viewModel = viewModel)
-    }
-}
-
-/*
-@Composable
-fun TuitCard(
-    tuit: Tuit,
-    modifier: Modifier = Modifier,
-    likePost: (it: Int) -> Unit,
-) {
-    Card(
-        modifier = modifier,
-    ) {
-        Header(tuit = tuit)
-        Box(modifier = Modifier.padding(8.dp)) {
-            Column {
-                Row {
-                    Text(tuit.message, fontSize = 24.sp)
+        Button(
+            onClick = {
+                if (tuit.liked) {
+                    viewModel.unlikePost(tuit.id)
+                } else {
+                    viewModel.likePost(tuit.id)
                 }
             }
+        ){
+            Text(text = if (tuit.liked) "Unlike" else "Like")
         }
-        BottomOptions(tuit, like = { likePost(tuit.id) })
+
+        LikeButton(
+            liked = tuit.liked,
+            likeCount = tuit.likes,
+            onLikeClicked = {
+                tuit.liked = !tuit.liked
+                tuit.likes += if (tuit.liked) 1 else -1
+            }
+        )
     }
 }
-
- */
 
 @Composable
 fun Header(tuit: Tuit) {
@@ -147,27 +133,3 @@ fun BottomOptions(
     }
 }
 
-/*
-@Composable
-fun BottomOptions(
-    tuit: Tuit,
-    like: (id: Int) -> Unit,
-) {
-    Row(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(vertical = 10.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Button(
-            onClick = { like(tuit.id) },
-        ) {
-            Icon(Icons.Outlined.FavoriteBorder, contentDescription = "like")
-        }
-    }
-
-}
-
- */
