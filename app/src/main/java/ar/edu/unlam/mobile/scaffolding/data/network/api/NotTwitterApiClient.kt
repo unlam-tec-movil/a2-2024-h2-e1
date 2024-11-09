@@ -46,8 +46,7 @@ interface NotTwitterApiClient {
         @Query("page") page: Int,
         @Header("Authorization") token: String,
     ): List<FeedResponseDto>
-
-        /*
+    /*
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
     @POST("me/tuits/:tuitID/likes")
     suspend fun addLike(): ResponseBody

@@ -1,8 +1,11 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
+import android.util.Log
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import ar.edu.unlam.mobile.scaffolding.domain.user.services.GetUserService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,6 +18,7 @@ import javax.inject.Inject
 sealed interface ProfilePopulationState {
     data class Success(
         val user: User,
+        val tuits: List<Tuit>?,
     ) : ProfilePopulationState
 
     data object Loading : ProfilePopulationState
@@ -33,18 +37,41 @@ class ProfileViewModel
     @Inject
     constructor(
         private val getUserService: GetUserService,
+        private val feedService: GetFeedService,
     ) : ViewModel() {
         private val _fetchUserState = MutableStateFlow(ProfileUiState(MutableStateFlow(ProfilePopulationState.Loading).value))
         val fetchUserState = _fetchUserState.asStateFlow()
+    fun likeButtonPressed(id: Int) {
+        viewModelScope.launch {
+            Log.i("ButtonLike", "Te gusta! el post $id")
+        }
+    }
 
         init {
             viewModelScope.launch {
+
                 val user = getUserService.getUserData()
-                if (user != null) {
-                    _fetchUserState.value = ProfileUiState(ProfilePopulationState.Success(user))
+                val tuits = feedService.getFeed(1)
+
+                if (user!= null){
+                    // Obtener los tuits filtrados por el correo del usuario
+                    Log.d("ProfileViewModel", "User data: $user")
+                    val tuits = feedService.getUserTuitsByEmail(user.name)
+
+                    if (tuits != null) {
+                        // Si se encuentran los tuits, actualizamos el estado
+                        _fetchUserState.value = ProfileUiState(ProfilePopulationState.Success(user, tuits))
+                    } else {
+                        // Si no se encuentran tuits, mostramos un error
+                        Log.d("ProfileViewModel", "Error: No user data found")
+                        _fetchUserState.value = ProfileUiState(ProfilePopulationState.Error("Error al cargar tuits"))
+                    }
                 } else {
-                    _fetchUserState.value = ProfileUiState(ProfilePopulationState.Error("error"))
+                    // Si no se encuentra el usuario, mostramos un error
+                    _fetchUserState.value = ProfileUiState(ProfilePopulationState.Error("Error al cargar perfil"))
                 }
             }
         }
-    }
+}
+
+
