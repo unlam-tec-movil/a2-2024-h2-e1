@@ -46,7 +46,7 @@ class HomeViewModel
 
         init {
             viewModelScope.launch {
-                val tuits = feedService.getFeed(1)
+                val tuits = feedService.getFeed(2)
                 if (tuits != null) {
                     _feedDataState.value = TuitUIState(TuitFeedUIState.Success(tuits))
                 }

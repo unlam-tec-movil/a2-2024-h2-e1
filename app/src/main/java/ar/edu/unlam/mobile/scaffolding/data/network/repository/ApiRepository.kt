@@ -63,7 +63,7 @@ class ApiRepository
                 val response = api.postNotTweet(token, NewPostBodyDto(message))
                 return response.toDomain()
             } catch (e: Exception) {
-                Log.e("Error", e.message.orEmpty())
+                Log.e("Error_Posteo", e.message.orEmpty())
                 return ApiResponseMessage(e.message.orEmpty(), 0)
             }
         }
@@ -74,14 +74,10 @@ class ApiRepository
         ): List<Tuit>? {
             try {
                 val tuits = api.getFeed(page, token)
-                return tuits.map {
-                    it.toDomain()
-                }
+                return tuits.map { it.toDomain() }
             } catch (e: Exception) {
                 Log.i("ERROR", e.message.orEmpty())
                 return null
             }
         }
-
-
     }
