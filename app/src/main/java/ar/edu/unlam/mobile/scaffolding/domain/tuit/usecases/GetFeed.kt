@@ -25,7 +25,7 @@ class GetFeed
 
 
 
-        val tuits = this.getFeed(1)?.filter { it.author == name }
+        val tuits = this.getFeed(2)?.filter { it.author == name }
         return tuits
     }
 
