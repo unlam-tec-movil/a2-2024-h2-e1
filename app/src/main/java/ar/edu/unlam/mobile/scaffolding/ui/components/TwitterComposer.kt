@@ -26,51 +26,48 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun TweetComposer(
-    /*goHome: () -> Unit,
+    goHome: () -> Unit,
     addTuit: () -> Unit,
     setNewMessage: (it: String) -> Unit,
     textMessage: String,
-    storeTuit: () -> Unit,*/
-
+    storeTuit: () -> Unit,
 ) {
-
     var tweetText by remember { mutableStateOf("") }
     val tweets = remember { mutableStateListOf<String>() }
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        // Profile picture
         Surface(
-            modifier = Modifier
-                .size(40.dp)
-                .clip(CircleShape),
-            color = Color.LightGray
+            modifier =
+                Modifier
+                    .size(40.dp)
+                    .clip(CircleShape),
+            color = Color.LightGray,
         ) {}
 
         Spacer(modifier = Modifier.width(12.dp))
 
         // Text field
         OutlinedTextField(
-            value =tweetText,
+            value = tweetText,
             onValueChange = { nextText ->
                 tweetText = nextText
             },
-            modifier = Modifier
-                .weight(1f)
-                .padding(end = 8.dp),
-            placeholder = { Text("¿Qué está pasando?") }
-
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp),
+            placeholder = { Text("¿Qué está pasando?") },
         )
-
-
         // Tweet button
         Button(
             onClick = { /*addTuit()*/ },
             modifier = Modifier.padding(start = 8.dp),
-            shape = MaterialTheme.shapes.medium
+            shape = MaterialTheme.shapes.medium,
         ) {
             Text("Publicar")
         }
