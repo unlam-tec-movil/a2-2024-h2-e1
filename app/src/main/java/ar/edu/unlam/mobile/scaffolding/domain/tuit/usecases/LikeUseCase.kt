@@ -8,11 +8,11 @@ import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.LikeService
 import javax.inject.Inject
 
 class LikeUseCase
-    @Inject
-    constructor(
-        private val api: ApiRepository,
-        private val localData: LocalDataRepository,
-    ) : LikeService {
+@Inject
+constructor(
+    private val api: ApiRepository,
+    private val localData: LocalDataRepository,
+) : LikeService {
     override suspend fun changeLikeStatus(likeStatus: Boolean, idTuit: Int): Boolean {
         val token = localData.getLoginToken()
         if(likeStatus){

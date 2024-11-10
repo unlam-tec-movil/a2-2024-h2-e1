@@ -49,39 +49,12 @@ class HomeViewModel
             try {
                 val response = apiRepository.likePost(postId, "token")
                 updateTuitLikeStatus(postId, liked = true)
-                /*
-                if (response.status == 1) {
-                    // Actualiza el estado local del post
-                    //val updatedPost = post.value?.copy(liked = true)
-                    //_post.value = updatedPost
-                    updateTuitLikeStatus(postId, liked = true)
-                } else {
-                    // Manejar el error
-                }
 
-                 */
             } catch (e: Exception) {
                 // Manejar el error
             }
         }
     }
-  /*
-    fun likePost(id: Int) {
-        viewModelScope.launch {
-            try {
-                val response = apiRepository.likePost(id, "token")
-                if (response.status == 1) {
-                    updateTuitLikeStatus(id, liked = true)
-                } else {
-                    Log.e("LikeError", "Error al dar like: ${response.message}")
-                }
-            } catch (e: Exception) {
-                Log.e("LikeError", "Exception al dar like: ${e.message}")
-            }
-        }
-
-   */
-
 
     // Método para quitar el like de un post
     fun unlikePost(id: Int) {

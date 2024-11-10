@@ -1,7 +1,7 @@
 package ar.edu.unlam.mobile.scaffolding.data.network.api
 
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.FeedResponseDto
-import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LikeDto
+
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LoginBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostResponseDto

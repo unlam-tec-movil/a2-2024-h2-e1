@@ -27,8 +27,6 @@ sealed interface PostTuitResultState {
         val message: String,
     ) : PostTuitResultState
 
-    data class Liked(val postId: Int) : PostTuitResultState
-    data class Unliked(val postId: Int) : PostTuitResultState
 }
 
 data class PostUiState(
@@ -78,85 +76,5 @@ class NewTuitViewModel
                 }
             }
         }
-
-
-        // Función para "like" un tuit
-        fun likePost(postId: Int) {
-            viewModelScope.launch {
-                try {
-                    val result = apiRepository.likePost(postId, "token")
-                  //  if (result.status == 0) {
-                  //      _postUIState.value = PostUiState(PostTuitResultState.Error(result.message))
-                //    } else {
-                        // Actualiza el estado local del Tuit
-                        // ... (aquí actualizarías el estado local de tu lista de tuits)
-                        _postUIState.value = PostUiState(PostTuitResultState.Liked(postId))
-                 //   }
-                } catch (e: Exception) {
-                    Log.e("Error", e.message.orEmpty())
-                    _postUIState.value = PostUiState(PostTuitResultState.Error(e.message.orEmpty()))
-                }
-            }
-        }
-    /*
-        fun likePost(postId: Int) {
-            viewModelScope.launch {
-                try {
-                    val result = postNewTuitService.likePost(postId) // Lógica de like
-                    if (result.status == 0) {
-                        _postUIState.value = PostUiState(PostTuitResultState.Error(result.message))
-                    } else {
-                        // Actualiza el estado con el postId que se ha dado like
-                        _postUIState.value = PostUiState(PostTuitResultState.Liked(postId))
-                    }
-                } catch (e: Exception) {
-                    Log.e("Error", e.message.orEmpty())
-                    _postUIState.value = PostUiState(PostTuitResultState.Error(e.message.orEmpty()))
-                }
-            }
-        }
-
-     */
-
-        // Función para "unlike" un tuit
-        fun unlikePost(postId: Int) {
-            viewModelScope.launch {
-                try {
-                    val result = apiRepository.unlikePost(postId, "token")
-                    if (result == null) {
-                     //   _postUIState.value = PostUiState(PostTuitResultState.Error)
-                    } else {
-                        // Actualiza el estado local del Tuit
-                        // ... (aquí actualizarías el estado local de tu lista de tuits)
-                        _postUIState.value = PostUiState(PostTuitResultState.Unliked(postId))
-                    }
-                } catch (e: Exception) {
-                    Log.e("Error", e.message.orEmpty())
-                    _postUIState.value = PostUiState(PostTuitResultState.Error(e.message.orEmpty()))
-                }
-            }
-        }
-/*
-        fun unlikePost(postId: Int) {
-            viewModelScope.launch {
-                try {
-                    val result = postNewTuitService.unlikePost(postId) // Lógica de unlike
-                    if (result.status == 0) {
-                        _postUIState.value = PostUiState(PostTuitResultState.Error(result.message))
-                    } else {
-                        // Actualiza el estado con el postId que se ha dado unlike
-                        _postUIState.value = PostUiState(PostTuitResultState.Unliked(postId))
-                    }
-                } catch (e: Exception) {
-                    Log.e("Error", e.message.orEmpty())
-                    _postUIState.value = PostUiState(PostTuitResultState.Error(e.message.orEmpty()))
-                }
-            }
-        }
-
- */
-
-
-
 
     }
