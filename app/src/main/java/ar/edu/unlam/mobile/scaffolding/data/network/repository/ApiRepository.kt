@@ -85,16 +85,33 @@ class ApiRepository
             }
         }
 
-    suspend fun likePost(postId: Int, token: String): Like? {
+    suspend fun likePost(postId: Int, token: String): Tuit? {
         return try {
             val response = api.likePost(postId, token)
-            response.toDomain()
+            val respuesta= response.toDomain()
+            Log.i("resp", respuesta.toString())
+            respuesta
         } catch (e: Exception) {
             Log.e("Error", e.message.orEmpty())
             return null
            // ApiResponseMessage(e.message.orEmpty(), 0)
         }
     }
+
+    suspend fun unlikePost(postId: Int, token: String): Tuit? {
+        return try {
+            val response = api.unlikePost(postId, token)
+            //response.toDomain()
+            val respuesta= response.toDomain()
+            Log.i("resp", respuesta.toString())
+            respuesta
+        } catch (e: Exception) {
+            Log.e("Error", e.message.orEmpty())
+            return null
+        }
+    }
+
+    /*
     suspend fun unlikePost(postId: Int, token: String): ApiResponseMessage {
         return try {
             val response = api.unlikePost(postId, token)
@@ -104,6 +121,7 @@ class ApiRepository
             ApiResponseMessage(e.message.orEmpty(), 0)
         }
     }
+     */
 
 
 

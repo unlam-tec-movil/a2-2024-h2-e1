@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile.scaffolding.data.network.repository.ApiRepository
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.LikeService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -35,7 +36,8 @@ class HomeViewModel
     @Inject
     constructor(
         private val feedService: GetFeedService,
-        private val apiRepository: ApiRepository
+        private val apiRepository: ApiRepository,
+        private val likeService: LikeService
     ) : ViewModel() {
         private val _feedDataState = MutableStateFlow(TuitUIState(MutableStateFlow(TuitFeedUIState.Loading).value))
         val feedDataState = _feedDataState.asStateFlow()
@@ -86,10 +88,10 @@ class HomeViewModel
         viewModelScope.launch {
             try {
                 val response = apiRepository.unlikePost(id, "token")
-                if (response.status == 1) {
+                if (response == null) {
                     updateTuitLikeStatus(id, liked = false)
                 } else {
-                    Log.e("UnlikeError", "Error al quitar like: ${response.message}")
+                    Log.e("UnlikeError", "Error al quitar like!")
                 }
             } catch (e: Exception) {
                 Log.e("UnlikeError", "Exception al quitar like: ${e.message}")
@@ -112,10 +114,16 @@ class HomeViewModel
         }
     }
 
-        fun likeButtonPressed(id: Int) {
+        fun likeButtonPressed(tuit: Tuit) {
             viewModelScope.launch {
-                Log.i("ButtonLike", "Te gusta! el post $id")
+                Log.i("ButtonLike", "Te gusta! el post $tuit")
+                likeService.changeLikeStatus(tuit.liked, tuit.id)
+                val tuits = feedService.getFeed(1)
+                if (tuits != null) {
+                    _feedDataState.value = TuitUIState(TuitFeedUIState.Success(tuits))
+                }
             }
+
         }
 
         init {

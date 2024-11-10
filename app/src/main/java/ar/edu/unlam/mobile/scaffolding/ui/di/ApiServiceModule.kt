@@ -1,8 +1,11 @@
 package ar.edu.unlam.mobile.scaffolding.ui.di
 
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Like
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.LikeService
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.PostNewTuitService
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.GetFeed
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.LikeUseCase
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.PostNewTuit
 import ar.edu.unlam.mobile.scaffolding.domain.user.services.GetUserService
 import ar.edu.unlam.mobile.scaffolding.domain.user.usecases.GetUserData
@@ -22,4 +25,7 @@ abstract class ApiServiceModule {
 
     @Binds
     abstract fun provideTuitFeedService(newFeedService: GetFeed): GetFeedService
+
+    @Binds
+    abstract fun provideLikeService(likeServiceImplementation: LikeUseCase): LikeService
 }

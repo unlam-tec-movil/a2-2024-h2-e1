@@ -13,13 +13,13 @@ import ar.edu.unlam.mobile.scaffolding.ui.screens.NewTuitViewModel
 @Composable
 fun TuitFeed(
     tuits: List<Tuit>,
-    likeEvent: (id: Int) -> Unit,
-    viewModel: NewTuitViewModel
+    likeEvent: (id: Tuit) -> Unit,
+    // viewModel: NewTuitViewModel
 ) {
     var modifier = Modifier.fillMaxSize()
     LazyColumn(modifier.padding(top = 10.dp)) {
         items(tuits) { tuit ->
-            TuitCard(likePost = likeEvent, tuit = tuit, modifier = Modifier.padding(1.dp), viewModel = viewModel)
+            TuitCard(likePost = likeEvent, tuit = tuit, modifier = Modifier.padding(1.dp))
         }
     }
 }

@@ -20,4 +20,8 @@ class LocalDataManagerImplementation
         override fun saveLastMessage(tuit: String) = sharedPreferences.edit().putString(lastMessage, tuit).apply()
 
         override fun getLastMessage(): String? = sharedPreferences.getString(lastMessage, null)
+
+        override fun deleteStoredMessage() {
+        sharedPreferences.edit().putString("", "").apply()
     }
+}

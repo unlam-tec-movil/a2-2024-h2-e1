@@ -8,4 +8,6 @@ interface LocalDataManager {
     fun saveLastMessage(tuit: String): Unit
 
     fun getLastMessage(): String?
+
+    fun deleteStoredMessage(): Unit
 }

@@ -37,8 +37,8 @@ import coil.compose.AsyncImage
 fun TuitCard(
     tuit: Tuit,
     modifier: Modifier = Modifier,
-    likePost: (it: Int) -> Unit,
-    viewModel: NewTuitViewModel
+    likePost: (it: Tuit) -> Unit,
+    // viewModel: NewTuitViewModel
 ) {
     Card(
         modifier = modifier,
@@ -52,27 +52,8 @@ fun TuitCard(
                 }
             }
         }
-        BottomOptions(tuit, like = likePost, viewModel = viewModel)
-        Button(
-            onClick = {
-                if (tuit.liked) {
-                    viewModel.unlikePost(tuit.id)
-                } else {
-                    viewModel.likePost(tuit.id)
-                }
-            }
-        ){
-            Text(text = if (tuit.liked) "Unlike" else "Like")
-        }
+        BottomOptions(tuit, like = likePost)
 
-        LikeButton(
-            liked = tuit.liked,
-            likeCount = tuit.likes,
-            onLikeClicked = {
-                tuit.liked = !tuit.liked
-                tuit.likes += if (tuit.liked) 1 else -1
-            }
-        )
     }
 }
 
@@ -107,8 +88,8 @@ fun Header(tuit: Tuit) {
 @Composable
 fun BottomOptions(
     tuit: Tuit,
-    like: (id: Int) -> Unit,
-    viewModel: NewTuitViewModel // Add viewModel as a parameter
+    like: (id: Tuit) -> Unit,
+   // viewModel: NewTuitViewModel // Add viewModel as a parameter
 ) {
     Row(
         modifier =
@@ -118,18 +99,24 @@ fun BottomOptions(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        val currentUiState by viewModel.postUIState.collectAsState()
 
-        val isLiked = currentUiState.resultState is PostTuitResultState.Liked &&
-                (currentUiState.resultState as PostTuitResultState.Liked).postId == tuit.id
-        val icon = if (isLiked) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder
-        val contentDescription = if (isLiked) "Unlike" else "Like"
+      //  val isLiked = currentUiState.resultState is PostTuitResultState.Liked &&
+         //       (currentUiState.resultState as PostTuitResultState.Liked).postId == tuit.id
+       val icon = if (tuit.liked) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder
+       val contentDescription = if (tuit.liked) "Unlike" else "Like"
 
         Button(
-            onClick = { like(tuit.id) },
-        ) {
-            Icon(icon, contentDescription = contentDescription)
+            onClick = {
+                like(tuit)
+            }
+        )
+
+        {
+           Icon(icon, contentDescription = contentDescription)
         }
+
+
     }
 }
+
 

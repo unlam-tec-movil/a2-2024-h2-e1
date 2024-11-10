@@ -17,6 +17,7 @@ class PostNewTuit
             val token = localData.getLoginToken()
             if (token != null) {
                 val responseBody = api.postNotTweet(token.toString(), tuit)
+                localData.deleteStoredMessage()
                 return responseBody
             }
             return ApiResponseMessage("No autorizado", 0)

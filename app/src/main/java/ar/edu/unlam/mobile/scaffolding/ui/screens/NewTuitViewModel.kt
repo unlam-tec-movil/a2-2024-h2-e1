@@ -74,6 +74,7 @@ class NewTuitViewModel
                     _postUIState.value = PostUiState(PostTuitResultState.Error(result.message))
                 } else {
                     _postUIState.value = PostUiState(PostTuitResultState.Success)
+                    _message.value = mutableStateOf(postNewTuitService.getLastTuitFromLocalData()).value
                 }
             }
         }
@@ -122,8 +123,8 @@ class NewTuitViewModel
             viewModelScope.launch {
                 try {
                     val result = apiRepository.unlikePost(postId, "token")
-                    if (result.status == 0) {
-                        _postUIState.value = PostUiState(PostTuitResultState.Error(result.message))
+                    if (result == null) {
+                     //   _postUIState.value = PostUiState(PostTuitResultState.Error)
                     } else {
                         // Actualiza el estado local del Tuit
                         // ... (aquí actualizarías el estado local de tu lista de tuits)

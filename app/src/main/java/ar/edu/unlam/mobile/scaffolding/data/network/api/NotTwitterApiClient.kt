@@ -8,6 +8,7 @@ import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostResponseDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.ProfileResponseDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.RegisterBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.TokenResponseDto
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.TuitResponseDto
 import ar.edu.unlam.mobile.scaffolding.domain.models.ApiResponseMessage
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Like
 import okhttp3.ResponseBody
@@ -54,19 +55,19 @@ interface NotTwitterApiClient {
     ): List<FeedResponseDto>
 
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
-    @POST("me/tuits/:tuitID/likes")
+    @POST("me/tuits/{tuit_id}/likes")
     suspend fun likePost(
-        @Path("postID") postId: Int,
+        @Path("tuit_id") tuitId: Int,
         @Header("Authorization") token: String,
-        ): LikeDto
+        ): TuitResponseDto
 
 
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
-    @DELETE("me/tuits/:tuitID/likes")
+    @DELETE("me/tuits/{tuit_id}/likes")
     suspend fun unlikePost(
-        @Path("tuitID") postId: Int,
+        @Path("tuit_id") tuitId: Int,
         @Header("Authorization") token: String
-    ): NewPostResponseDto
+    ): TuitResponseDto
 
 }
 

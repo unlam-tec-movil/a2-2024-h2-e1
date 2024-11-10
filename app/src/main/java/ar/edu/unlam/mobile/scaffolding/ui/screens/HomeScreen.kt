@@ -25,7 +25,7 @@ fun Homescreen(
         }
 
         is TuitFeedUIState.Success -> {
-            TuitFeed(feedState.tuits, likeEvent = { viewModel.likeButtonPressed(it) }, viewModel = hiltViewModel())
+            TuitFeed(feedState.tuits, likeEvent = { viewModel.likeButtonPressed(it) })
         }
         is TuitFeedUIState.Error -> {
             Text(text = "Error")
