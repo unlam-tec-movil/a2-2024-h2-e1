@@ -99,4 +99,19 @@ class LoginViewModel
                 }
             }
         }
+    fun updateUser(newName: String, newEmail: String) {
+        viewModelScope.launch {
+            val user = getUserService.getUserData()
+            if (user != null) {
+                user.name = newName
+                user.email = newEmail
+                _name.value = newName
+                _email.value = newEmail
+            }
+        }
+    }
+    fun getCurrentUser(): User {
+
+        return User(name = _name.value, email = _email.value, avatar_url = "")
+    }
     }

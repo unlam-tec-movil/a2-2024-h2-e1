@@ -32,8 +32,6 @@ fun TweetComposer(
     textMessage: String,
     storeTuit: () -> Unit,
 ) {
-    var tweetText by remember { mutableStateOf("") }
-    val tweets = remember { mutableStateListOf<String>() }
     Row(
         modifier =
             Modifier
@@ -53,10 +51,8 @@ fun TweetComposer(
 
         // Text field
         OutlinedTextField(
-            value = tweetText,
-            onValueChange = { nextText ->
-                tweetText = nextText
-            },
+            value = textMessage,
+            onValueChange = { setNewMessage(it) },
             modifier =
                 Modifier
                     .weight(1f)
@@ -65,7 +61,7 @@ fun TweetComposer(
         )
         // Tweet button
         Button(
-            onClick = { /*addTuit()*/ },
+            onClick = { addTuit() },
             modifier = Modifier.padding(start = 8.dp),
             shape = MaterialTheme.shapes.medium,
         ) {

@@ -26,14 +26,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import coil.compose.AsyncImage
 
 @Composable
-fun UserDetails(user: User, /*tuits: List<Tuit>, likeEvent: (id: Int) -> Unit*/) {
+fun UserDetails(user: User, navController: NavController) {
     LazyColumn {
-        item { ProfileHeader(user) }
+        item { ProfileHeader(user, navController) }
         /*item { TuitProfile(tuits = tuits, likeEvent = likeEvent) }*/
     }
 }

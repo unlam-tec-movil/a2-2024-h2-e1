@@ -12,12 +12,14 @@ import ar.edu.unlam.mobile.scaffolding.ui.components.TuitFeed
 fun Homescreen(
     // navController: NavHostController? = null,
     viewModel: HomeViewModel = hiltViewModel(),
+    newTuitViewModel: NewTuitViewModel = hiltViewModel(),
     // modifier: Modifier,
 ) {
     // La información que obtenemos desde el view model la consumimos a través de un estado de
     // "tres vías": Loading, Success y Error. Esto nos permite mostrar un estado de carga,
     // un estado de éxito y un mensaje de error.
     val tuitState: TuitUIState by viewModel.feedDataState.collectAsState()
+    val textMessage by newTuitViewModel.message
 
     when (val feedState = tuitState.tuitFeedUIState) {
         is TuitFeedUIState.Loading -> {
@@ -25,6 +27,7 @@ fun Homescreen(
         }
 
         is TuitFeedUIState.Success -> {
+
             TuitFeed(feedState.tuits, likeEvent = { viewModel.likeButtonPressed(it) })
         }
         is TuitFeedUIState.Error -> {

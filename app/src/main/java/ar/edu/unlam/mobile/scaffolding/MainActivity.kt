@@ -21,6 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ar.edu.unlam.mobile.scaffolding.ui.components.BottomBar
+import ar.edu.unlam.mobile.scaffolding.ui.screens.EditProfileScreen
 import ar.edu.unlam.mobile.scaffolding.ui.screens.Homescreen
 import ar.edu.unlam.mobile.scaffolding.ui.screens.IsLoggedUIState
 import ar.edu.unlam.mobile.scaffolding.ui.screens.LoggedUserUIState
@@ -99,15 +100,21 @@ fun MainScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     }
                     composable("profile") {
                         // Home es el componente en sí que es el destino de navegación.
-                        ProfileScreen(modifier = Modifier.padding(paddingValue))
+                        ProfileScreen(modifier = Modifier.padding(paddingValue), navController = controller)
                     }
                     composable("new_tuit") {
                         // Home es el componente en sí que es el destino de navegación.
 
                         NewTuitScreen(navController = controller)
                     }
+                    composable ("editProfile"){
+                        EditProfileScreen(navController = controller)
+
+                    }
                 }
             }
         }
     }
 }
+
+
