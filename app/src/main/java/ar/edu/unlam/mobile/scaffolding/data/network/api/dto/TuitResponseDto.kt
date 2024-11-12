@@ -5,7 +5,6 @@ import com.squareup.moshi.Json
 import javax.inject.Inject
 
 class TuitResponseDto
-
     @Inject
     constructor(
         @Json(name = "id")
@@ -26,15 +25,14 @@ class TuitResponseDto
         val date: String,
     )
 
-    fun TuitResponseDto.toDomain(): Tuit {
-        return Tuit(
-            id = this.id,
-            message = this.message,
-            parent_id = this.parent_id,
-            author = this.author,
-            avatar_url = this.avatar_url,
-            likes = this.likes,
-            liked = this.liked,
-            date = this.date
-        )
-    }
+fun TuitResponseDto.toDomain(): Tuit =
+    Tuit(
+        id = this.id,
+        message = this.message,
+        parent_id = this.parent_id,
+        author = this.author,
+        avatar_url = this.avatar_url,
+        likes = this.likes,
+        liked = this.liked,
+        date = this.date,
+    )
