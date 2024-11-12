@@ -1,11 +1,12 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
-import android.util.Log
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.unlam.mobile.scaffolding.domain.pagination.usecases.PaginationManagerInterface
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.GetFeedUseCase
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.LikeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -33,20 +34,26 @@ data class TuitUIState(
 class HomeViewModel
     @Inject
     constructor(
-        private val feedService: GetFeedService,
+        private val feedService: GetFeedUseCase,
+        private val likeUseCase: LikeUseCase,
+        private val paginationService: PaginationManagerInterface,
     ) : ViewModel() {
         private val _feedDataState = MutableStateFlow(TuitUIState(MutableStateFlow(TuitFeedUIState.Loading).value))
         val feedDataState = _feedDataState.asStateFlow()
 
-        fun likeButtonPressed(id: Int) {
+        init {
             viewModelScope.launch {
-                Log.i("ButtonLike", "Te gusta! el post $id")
+                val tuits = feedService.getFeed()
+                if (tuits != null) {
+                    _feedDataState.value = TuitUIState(TuitFeedUIState.Success(tuits))
+                }
             }
         }
 
-        init {
+        fun likeButtonPressed(tuit: Tuit) {
             viewModelScope.launch {
-                val tuits = feedService.getFeed(1)
+                likeUseCase.changeLikeStatus(tuit.liked, tuit.id)
+                val tuits = feedService.getFeed()
                 if (tuits != null) {
                     _feedDataState.value = TuitUIState(TuitFeedUIState.Success(tuits))
                 }

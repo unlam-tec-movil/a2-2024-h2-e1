@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -7,18 +8,28 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.unlam.mobile.scaffolding.ui.components.Loader
+import ar.edu.unlam.mobile.scaffolding.ui.components.TuitFeed
 import ar.edu.unlam.mobile.scaffolding.ui.components.UserDetails
 
 @Composable
 fun ProfileScreen(
     viewModel: ProfileViewModel = hiltViewModel(),
+    homeviewModel: HomeViewModel = hiltViewModel(),
     modifier: Modifier,
 ) {
     val logState: ProfileUiState by viewModel.fetchUserState.collectAsState()
 
     when (val profileData = logState.profileState) {
         is ProfilePopulationState.Success -> {
-            UserDetails(profileData.user)
+            Column(modifier = modifier) {
+                UserDetails(profileData.user)
+                profileData.tuits?.let { tuits ->
+                    TuitFeed(
+                        tuits = tuits,
+                        likeEvent = { homeviewModel.likeButtonPressed(it) },
+                    )
+                }
+            }
         }
 
         is ProfilePopulationState.Loading -> {

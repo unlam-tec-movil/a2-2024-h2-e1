@@ -25,6 +25,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        externalNativeBuild {
+            cmake {
+                cppFlags += ""
+            }
+        }
     }
 
     buildTypes {
@@ -51,6 +56,12 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
 }
 
 dependencies {
@@ -72,6 +83,7 @@ dependencies {
     implementation(libs.androidx.room.room.runtime3)
     implementation(libs.androidx.room.room.ktx)
     implementation(libs.androidx.androidx.room.gradle.plugin)
+    implementation(libs.androidx.room.common)
     ksp(libs.androidx.room.room.compiler6)
 
     testImplementation(libs.junit)

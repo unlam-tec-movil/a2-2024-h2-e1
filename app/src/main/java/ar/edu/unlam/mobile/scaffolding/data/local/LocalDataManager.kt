@@ -8,4 +8,15 @@ interface LocalDataManager {
     fun saveLastMessage(tuit: String): Unit
 
     fun getLastMessage(): String?
+
+    // pagination
+    fun getNavPage(): Int
+
+    fun steptToNextPage()
+
+    fun steptToPreviousPage()
+
+    fun storeNavPage(page: Int)
+
+    fun deleteStoredMessage()
 }
