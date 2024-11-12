@@ -19,7 +19,7 @@ class PostNewTuit
             val token = localData.getLoginToken()
             if (token != null) {
                 val responseBody = api.postNotTweet(token.toString(), tuit)
-                getFeed.getFeed(2)
+                getFeed.getFeed()
                 return responseBody
             }
 

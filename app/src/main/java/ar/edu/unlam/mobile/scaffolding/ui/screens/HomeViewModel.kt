@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.unlam.mobile.scaffolding.domain.pagination.service.PaginationManagerInterface
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,6 +35,7 @@ class HomeViewModel
     @Inject
     constructor(
         private val feedService: GetFeedService,
+        private val paginationService: PaginationManagerInterface,
     ) : ViewModel() {
         private val _feedDataState = MutableStateFlow(TuitUIState(MutableStateFlow(TuitFeedUIState.Loading).value))
         val feedDataState = _feedDataState.asStateFlow()
@@ -46,7 +48,8 @@ class HomeViewModel
 
         init {
             viewModelScope.launch {
-                val tuits = feedService.getFeed(2)
+                paginationService.initSaveData()
+                val tuits = feedService.getFeed()
                 if (tuits != null) {
                     _feedDataState.value = TuitUIState(TuitFeedUIState.Success(tuits))
                 }

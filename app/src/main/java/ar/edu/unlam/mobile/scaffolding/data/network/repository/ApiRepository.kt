@@ -71,13 +71,16 @@ class ApiRepository
         suspend fun getFeed(
             page: Int,
             token: String,
-        ): List<Tuit>? {
+        ): List<Tuit> {
             try {
                 val tuits = api.getFeed(page, token)
+                if (tuits.isEmpty()) {
+                    return emptyList()
+                }
                 return tuits.map { it.toDomain() }
             } catch (e: Exception) {
                 Log.i("ERROR", e.message.orEmpty())
-                return null
+                return emptyList()
             }
         }
     }

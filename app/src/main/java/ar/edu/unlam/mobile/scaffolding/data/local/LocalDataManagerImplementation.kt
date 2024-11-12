@@ -20,4 +20,12 @@ class LocalDataManagerImplementation
         override fun saveLastMessage(tuit: String) = sharedPreferences.edit().putString(lastMessage, tuit).apply()
 
         override fun getLastMessage(): String? = sharedPreferences.getString(lastMessage, null)
+
+        override fun storeNavPage(page: Int) = sharedPreferences.edit().putInt("nav_page", page).apply()
+
+        override fun getNavPage(): Int = sharedPreferences.getInt("nav_page", 1)
+
+        override fun steptToNextPage() = sharedPreferences.edit().putInt("nav_page", getNavPage() + 1).apply()
+
+        override fun steptToPreviousPage() = sharedPreferences.edit().putInt("nav_page", getNavPage() - 1).apply()
     }
