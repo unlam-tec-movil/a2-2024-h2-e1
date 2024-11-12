@@ -74,6 +74,7 @@ class ApiRepository
         ): List<Tuit> {
             try {
                 val tuits = api.getFeed(page, token)
+                Log.i("pruebaGetFeed", tuits.toString())
                 if (tuits.isEmpty()) {
                     return emptyList()
                 }

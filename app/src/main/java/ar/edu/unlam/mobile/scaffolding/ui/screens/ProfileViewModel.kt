@@ -5,9 +5,9 @@ import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.GetFeedUseCase
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
-import ar.edu.unlam.mobile.scaffolding.domain.user.services.GetUserService
+import ar.edu.unlam.mobile.scaffolding.domain.user.usecases.GetUserDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,17 +36,22 @@ data class ProfileUiState(
 class ProfileViewModel
     @Inject
     constructor(
-        private val getUserService: GetUserService,
-        private val feedService: GetFeedService,
+        private val getUserService: GetUserDataUseCase,
+        private val feedService: GetFeedUseCase,
     ) : ViewModel() {
-        private val _fetchUserState = MutableStateFlow(ProfileUiState(MutableStateFlow(ProfilePopulationState.Loading).value))
+        private val _fetchUserState =
+            MutableStateFlow(
+                ProfileUiState(
+                    MutableStateFlow(ProfilePopulationState.Loading).value,
+                ),
+            )
         val fetchUserState = _fetchUserState.asStateFlow()
 
-        fun likeButtonPressed(id: Int) {
+        /*fun likeButtonPressed(id: Int) {
             viewModelScope.launch {
                 Log.i("ButtonLike", "Te gusta! el post $id")
             }
-        }
+        }*/
 
         init {
             viewModelScope.launch {

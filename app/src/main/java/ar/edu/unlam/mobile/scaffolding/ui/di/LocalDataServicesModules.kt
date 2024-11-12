@@ -1,7 +1,7 @@
 package ar.edu.unlam.mobile.scaffolding.ui.di
 
-import ar.edu.unlam.mobile.scaffolding.domain.pagination.service.PaginationManagerInterface
-import ar.edu.unlam.mobile.scaffolding.domain.pagination.usecases.Pagination
+import ar.edu.unlam.mobile.scaffolding.domain.pagination.service.Pagination
+import ar.edu.unlam.mobile.scaffolding.domain.pagination.usecases.PaginationManagerInterface
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

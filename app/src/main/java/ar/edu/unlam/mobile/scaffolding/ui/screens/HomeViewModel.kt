@@ -3,10 +3,10 @@ package ar.edu.unlam.mobile.scaffolding.ui.screens
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ar.edu.unlam.mobile.scaffolding.domain.pagination.service.PaginationManagerInterface
+import ar.edu.unlam.mobile.scaffolding.domain.pagination.usecases.PaginationManagerInterface
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.LikeService
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.GetFeedUseCase
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.LikeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -34,8 +34,8 @@ data class TuitUIState(
 class HomeViewModel
     @Inject
     constructor(
-        private val feedService: GetFeedService,
-        private val likeService: LikeService,
+        private val feedService: GetFeedUseCase,
+        private val likeUseCase: LikeUseCase,
         private val paginationService: PaginationManagerInterface,
     ) : ViewModel() {
         private val _feedDataState = MutableStateFlow(TuitUIState(MutableStateFlow(TuitFeedUIState.Loading).value))
@@ -43,7 +43,6 @@ class HomeViewModel
 
         init {
             viewModelScope.launch {
-                paginationService.initSaveData()
                 val tuits = feedService.getFeed()
                 if (tuits != null) {
                     _feedDataState.value = TuitUIState(TuitFeedUIState.Success(tuits))
@@ -53,7 +52,7 @@ class HomeViewModel
 
         fun likeButtonPressed(tuit: Tuit) {
             viewModelScope.launch {
-                likeService.changeLikeStatus(tuit.liked, tuit.id)
+                likeUseCase.changeLikeStatus(tuit.liked, tuit.id)
                 val tuits = feedService.getFeed()
                 if (tuits != null) {
                     _feedDataState.value = TuitUIState(TuitFeedUIState.Success(tuits))

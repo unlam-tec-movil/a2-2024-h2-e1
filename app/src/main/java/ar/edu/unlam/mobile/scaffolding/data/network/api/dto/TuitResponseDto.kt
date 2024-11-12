@@ -18,7 +18,7 @@ class TuitResponseDto
         @Json(name = "avatar_url")
         val avatar_url: String,
         @Json(name = "likes")
-        val likes: Int,
+        val likes: Long,
         @Json(name = "liked")
         val liked: Boolean,
         @Json(name = "date")

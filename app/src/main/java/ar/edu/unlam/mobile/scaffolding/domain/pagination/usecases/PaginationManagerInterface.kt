@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile.scaffolding.domain.pagination.service
+package ar.edu.unlam.mobile.scaffolding.domain.pagination.usecases
 
 interface PaginationManagerInterface {
     fun initSaveData(): Unit

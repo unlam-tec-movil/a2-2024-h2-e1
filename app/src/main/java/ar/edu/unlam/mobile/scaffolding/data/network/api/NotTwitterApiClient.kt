@@ -1,6 +1,5 @@
 package ar.edu.unlam.mobile.scaffolding.data.network.api
 
-import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.FeedResponseDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LoginBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostResponseDto
@@ -48,7 +47,7 @@ interface NotTwitterApiClient {
     suspend fun getFeed(
         @Query("page") page: Int,
         @Header("Authorization") token: String,
-    ): List<FeedResponseDto>
+    ): List<TuitResponseDto>
 
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
     @POST("me/tuits/{tuit_id}/likes")
