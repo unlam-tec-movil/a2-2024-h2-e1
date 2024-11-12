@@ -55,17 +55,12 @@ interface NotTwitterApiClient {
     suspend fun likePost(
         @Path("tuit_id") tuitId: Int,
         @Header("Authorization") token: String,
-        ): TuitResponseDto
-
+    ): TuitResponseDto
 
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
     @DELETE("me/tuits/{tuit_id}/likes")
     suspend fun unlikePost(
         @Path("tuit_id") tuitId: Int,
-        @Header("Authorization") token: String
+        @Header("Authorization") token: String,
     ): TuitResponseDto
-
 }
-
-
-
