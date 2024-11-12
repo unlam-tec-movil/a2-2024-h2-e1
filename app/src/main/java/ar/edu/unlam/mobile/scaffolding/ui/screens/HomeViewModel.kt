@@ -1,6 +1,5 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
-import android.util.Log
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -54,7 +53,6 @@ class HomeViewModel
 
         fun likeButtonPressed(tuit: Tuit) {
             viewModelScope.launch {
-                Log.i("ButtonLike", "Te gusta! el post $tuit")
                 likeService.changeLikeStatus(tuit.liked, tuit.id)
                 val tuits = feedService.getFeed()
                 if (tuits != null) {

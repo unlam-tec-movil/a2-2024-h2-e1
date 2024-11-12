@@ -17,9 +17,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,15 +26,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
-import ar.edu.unlam.mobile.scaffolding.ui.screens.NewTuitViewModel
-import ar.edu.unlam.mobile.scaffolding.ui.screens.PostTuitResultState
 import coil.compose.AsyncImage
 
 @Composable
 fun TuitCard(
     tuit: Tuit,
     modifier: Modifier = Modifier,
-    likePost: (it: Tuit) -> Unit,
+    likePost: (tuit: Tuit) -> Unit,
     // viewModel: NewTuitViewModel
 ) {
     Card(
@@ -48,12 +43,10 @@ fun TuitCard(
             Column {
                 Row {
                     Text(tuit.message, fontSize = 24.sp)
-
                 }
             }
         }
         BottomOptions(tuit, like = likePost)
-
     }
 }
 
@@ -88,35 +81,28 @@ fun Header(tuit: Tuit) {
 @Composable
 fun BottomOptions(
     tuit: Tuit,
-    like: (id: Tuit) -> Unit,
-   // viewModel: NewTuitViewModel // Add viewModel as a parameter
+    like: (tuit: Tuit) -> Unit,
+    // viewModel: NewTuitViewModel // Add viewModel as a parameter
 ) {
     Row(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .padding(vertical = 10.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp),
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-
-      //  val isLiked = currentUiState.resultState is PostTuitResultState.Liked &&
-         //       (currentUiState.resultState as PostTuitResultState.Liked).postId == tuit.id
-       val icon = if (tuit.liked) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder
-       val contentDescription = if (tuit.liked) "Unlike" else "Like"
+        //  val isLiked = currentUiState.resultState is PostTuitResultState.Liked &&
+        //       (currentUiState.resultState as PostTuitResultState.Liked).postId == tuit.id
+        val icon = if (tuit.liked) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder
+        val contentDescription = if (tuit.liked) "Unlike" else "Like"
 
         Button(
             onClick = {
                 like(tuit)
-            }
-        )
-
-        {
-           Icon(icon, contentDescription = contentDescription)
+            },
+        ) {
+            Icon(icon, contentDescription = contentDescription)
         }
-
-
     }
 }
-
-

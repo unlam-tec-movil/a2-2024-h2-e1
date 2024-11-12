@@ -14,21 +14,22 @@ import ar.edu.unlam.mobile.scaffolding.ui.components.UserDetails
 @Composable
 fun ProfileScreen(
     viewModel: ProfileViewModel = hiltViewModel(),
+    homeviewModel: HomeViewModel = hiltViewModel(),
     modifier: Modifier,
 ) {
     val logState: ProfileUiState by viewModel.fetchUserState.collectAsState()
 
     when (val profileData = logState.profileState) {
         is ProfilePopulationState.Success -> {
-            Column (modifier = modifier){
-            UserDetails(profileData.user)
+            Column(modifier = modifier) {
+                UserDetails(profileData.user)
                 profileData.tuits?.let { tuits ->
                     TuitFeed(
                         tuits = tuits,
-                        likeEvent = { tuitId -> viewModel.likeButtonPressed(tuitId) }
-                    ) }
+                        likeEvent = { homeviewModel.likeButtonPressed(it) },
+                    )
+                }
             }
-
         }
 
         is ProfilePopulationState.Loading -> {
