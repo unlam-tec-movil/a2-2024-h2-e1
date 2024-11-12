@@ -1,6 +1,5 @@
 package ar.edu.unlam.mobile.scaffolding.ui.di
 
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Like
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.LikeService
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.PostNewTuitService

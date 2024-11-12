@@ -1,13 +1,11 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
-import android.util.Log
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile.scaffolding.data.network.repository.ApiRepository
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.PostNewTuitService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,12 +24,10 @@ sealed interface PostTuitResultState {
     data class Error(
         val message: String,
     ) : PostTuitResultState
-
 }
 
 data class PostUiState(
     val resultState: PostTuitResultState,
-
 )
 
 @HiltViewModel
@@ -40,7 +36,7 @@ NewTuitViewModel
     @Inject
     constructor(
         private val postNewTuitService: PostNewTuitService,
-        private val apiRepository: ApiRepository
+        private val apiRepository: ApiRepository,
     ) : ViewModel() {
         private val _message = mutableStateOf("")
         val message: State<String> = _message
@@ -77,5 +73,4 @@ NewTuitViewModel
                 }
             }
         }
-
     }

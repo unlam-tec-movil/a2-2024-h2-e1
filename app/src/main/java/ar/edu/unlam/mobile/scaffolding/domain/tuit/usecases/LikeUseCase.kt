@@ -16,12 +16,11 @@ class LikeUseCase
             idTuit: Int,
         ): Boolean {
             val token = localData.getLoginToken()
-            if (likeStatus)
-                {
-                    if (token != null) {
-                        api.unlikePost(idTuit, token)
-                    }
-                } else {
+            if (likeStatus) {
+                if (token != null) {
+                    api.unlikePost(idTuit, token)
+                }
+            } else {
                 if (token != null) {
                     api.likePost(idTuit, token)
                 }
