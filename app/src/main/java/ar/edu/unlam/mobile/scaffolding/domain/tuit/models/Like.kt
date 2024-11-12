@@ -1,9 +1,7 @@
 package ar.edu.unlam.mobile.scaffolding.domain.tuit.models
 
-data class Like (
+data class Like(
     val postId: Int,
     val token: String,
-    //val userEmail: String
-) {
-
-}
+    // val userEmail: String
+)
