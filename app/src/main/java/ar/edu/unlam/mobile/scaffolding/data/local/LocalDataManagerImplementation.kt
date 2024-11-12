@@ -28,4 +28,8 @@ class LocalDataManagerImplementation
         override fun steptToNextPage() = sharedPreferences.edit().putInt("nav_page", getNavPage() + 1).apply()
 
         override fun steptToPreviousPage() = sharedPreferences.edit().putInt("nav_page", getNavPage() - 1).apply()
+
+        override fun deleteStoredMessage() {
+            sharedPreferences.edit().putString("", "").apply()
+        }
     }

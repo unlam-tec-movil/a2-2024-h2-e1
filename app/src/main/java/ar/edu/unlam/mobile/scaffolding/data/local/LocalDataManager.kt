@@ -17,4 +17,6 @@ interface LocalDataManager {
     fun steptToPreviousPage()
 
     fun storeNavPage(page: Int)
+
+    fun deleteStoredMessage()
 }

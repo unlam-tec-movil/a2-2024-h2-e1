@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile.scaffolding.domain.pagination.service.PaginationManagerInterface
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.LikeService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -35,20 +36,26 @@ class HomeViewModel
     @Inject
     constructor(
         private val feedService: GetFeedService,
+        private val likeService: LikeService,
         private val paginationService: PaginationManagerInterface,
     ) : ViewModel() {
         private val _feedDataState = MutableStateFlow(TuitUIState(MutableStateFlow(TuitFeedUIState.Loading).value))
         val feedDataState = _feedDataState.asStateFlow()
 
-        fun likeButtonPressed(id: Int) {
-            viewModelScope.launch {
-                Log.i("ButtonLike", "Te gusta! el post $id")
-            }
-        }
-
         init {
             viewModelScope.launch {
                 paginationService.initSaveData()
+                val tuits = feedService.getFeed()
+                if (tuits != null) {
+                    _feedDataState.value = TuitUIState(TuitFeedUIState.Success(tuits))
+                }
+            }
+        }
+
+        fun likeButtonPressed(tuit: Tuit) {
+            viewModelScope.launch {
+                Log.i("ButtonLike", "Te gusta! el post $tuit")
+                likeService.changeLikeStatus(tuit.liked, tuit.id)
                 val tuits = feedService.getFeed()
                 if (tuits != null) {
                     _feedDataState.value = TuitUIState(TuitFeedUIState.Success(tuits))

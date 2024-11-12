@@ -6,8 +6,10 @@ import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LoginBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.RegisterBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.toDomain
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.TuitResponseDto
 import ar.edu.unlam.mobile.scaffolding.domain.login.models.LoggedUserToken
 import ar.edu.unlam.mobile.scaffolding.domain.models.ApiResponseMessage
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Like
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import javax.inject.Inject
@@ -83,4 +85,50 @@ class ApiRepository
                 return emptyList()
             }
         }
+
+    suspend fun likePost(postId: Int, token: String): Tuit? {
+        return try {
+            val response = api.likePost(postId, token)
+            val respuesta= response.toDomain()
+            Log.i("resp", respuesta.toString())
+            respuesta
+        } catch (e: Exception) {
+            Log.e("Error", e.message.orEmpty())
+            return null
+           // ApiResponseMessage(e.message.orEmpty(), 0)
+        }
     }
+
+    suspend fun unlikePost(postId: Int, token: String): Tuit? {
+        return try {
+            val response = api.unlikePost(postId, token)
+            //response.toDomain()
+            val respuesta= response.toDomain()
+            Log.i("resp", respuesta.toString())
+            respuesta
+        } catch (e: Exception) {
+            Log.e("Error", e.message.orEmpty())
+            return null
+        }
+    }
+
+    /*
+    suspend fun unlikePost(postId: Int, token: String): ApiResponseMessage {
+        return try {
+            val response = api.unlikePost(postId, token)
+            response.toDomain()
+        } catch (e: Exception) {
+            Log.e("Error", e.message.orEmpty())
+            ApiResponseMessage(e.message.orEmpty(), 0)
+        }
+    }
+     */
+
+
+
+}
+
+
+
+
+

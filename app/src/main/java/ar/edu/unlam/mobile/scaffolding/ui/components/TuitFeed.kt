@@ -16,12 +16,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
+import ar.edu.unlam.mobile.scaffolding.ui.screens.NewTuitViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TuitFeed(
     tuits: List<Tuit>,
-    likeEvent: (id: Int) -> Unit,
+    likeEvent: (id: Tuit) -> Unit,
+    // viewModel: NewTuitViewModel
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),

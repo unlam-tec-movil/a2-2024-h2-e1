@@ -20,6 +20,7 @@ class PostNewTuit
             if (token != null) {
                 val responseBody = api.postNotTweet(token.toString(), tuit)
                 getFeed.getFeed()
+                localData.deleteStoredMessage()
                 return responseBody
             }
 
