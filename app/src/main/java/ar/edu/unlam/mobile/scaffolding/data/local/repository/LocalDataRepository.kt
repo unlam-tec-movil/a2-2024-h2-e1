@@ -66,13 +66,12 @@ class LocalDataRepository
             }
         }
 
-       fun deleteStoredMessage(): String {
-           return try {
-               preferencesManager.deleteStoredMessage()
+        fun deleteStoredMessage(): String =
+            try {
+                preferencesManager.deleteStoredMessage()
                 ""
-           } catch (e: Exception) {
-               Log.e("Error", e.message.orEmpty())
-               ""
-           }
-       }
+            } catch (e: Exception) {
+                Log.e("Error", e.message.orEmpty())
+                ""
+            }
     }
