@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile.scaffolding.ui.screens
 
+import android.util.Log
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile.scaffolding.data.local.entity.LocalUserEntity
 import ar.edu.unlam.mobile.scaffolding.data.local.repository.LocalDataRepository
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.UpdateProfileBodyDto
 import ar.edu.unlam.mobile.scaffolding.domain.login.services.UserLoginService
 import ar.edu.unlam.mobile.scaffolding.domain.login.services.UserRegistrationService
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
@@ -103,6 +105,7 @@ constructor(
             }
         }
     }
+
     suspend fun getCurrentUser(): User {
         return getUserService.getUserData()?.also { user ->
             _name.value = user.name
@@ -111,22 +114,27 @@ constructor(
         } ?: throw IllegalStateException("Usuario no autenticado")
     }
 
-    fun updateUser(newName: String, newEmail: String) {
+    fun updateProfile(name: String, avatarUrl: String? = null, password: String? = null) {
         viewModelScope.launch {
             try {
-                val currentUser = getUserService.getUserData()
-                if (currentUser != null) {
-                    currentUser.name = newName
-                    currentUser.email = newEmail
+                val token = localDataRepository.getLoginToken()
 
-                    // Actualizar el estado local
-                    _name.value = newName
-                    _email.value = newEmail
+                if (token != null) {
+                    val updateProfileBody = UpdateProfileBodyDto(
+                        name = name,
+                        avatar_url = avatarUrl ?: "",
+                        password = password
+                    )
+                    val updatedUser = userLogin.updateProfile(token,updateProfileBody)
 
-                    //getUserService.updateUser(currentUser)
+                    updatedUser?.let {
+                        _name.value = it.name
+                        _email.value = it.email
+                    }
+                } else {
                 }
             } catch (e: Exception) {
-                _loggedState.value = IsLoggedUIState(LoggedUserUIState.NotLogged)
+                Log.e("LoginViewModel", "Error al actualizar perfil: ${e.message}")
             }
         }
     }

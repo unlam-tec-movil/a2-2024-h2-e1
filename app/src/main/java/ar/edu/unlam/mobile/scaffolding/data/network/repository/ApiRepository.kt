@@ -5,6 +5,7 @@ import ar.edu.unlam.mobile.scaffolding.data.network.api.NotTwitterApiClient
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LoginBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.RegisterBodyDto
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.UpdateProfileBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.toDomain
 import ar.edu.unlam.mobile.scaffolding.domain.login.models.LoggedUserToken
 import ar.edu.unlam.mobile.scaffolding.domain.models.ApiResponseMessage
@@ -80,4 +81,13 @@ class ApiRepository
                 return null
             }
         }
+    suspend fun updateProfile(token: String, updateProfileBody: UpdateProfileBodyDto): User? {
+        try {
+            val response = api.updateProfile(token, updateProfileBody)
+            return response.toDomain()
+        } catch (e: Exception) {
+            Log.e("ApiRepository", "Error al actualizar perfil: ${e.message}")
+            return null
+        }
+    }
     }

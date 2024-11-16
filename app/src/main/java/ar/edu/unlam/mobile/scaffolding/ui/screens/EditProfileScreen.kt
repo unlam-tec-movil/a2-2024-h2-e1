@@ -30,38 +30,41 @@ fun EditProfileScreen(
     val coroutineScope = rememberCoroutineScope()
     var user by remember { mutableStateOf<User?>(null) }
 
+    // Variables para el formulario de edición
+    var name by remember { mutableStateOf("") }
+    var avatarUrl by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
         try {
             user = viewModel.getCurrentUser()
+            user?.let {
+                name = it.name
+            }
         } catch (e: Exception) {
-            // El usuario no está autenticado o hubo un error
         }
     }
 
     when (logState.loggedUserUiState) {
         is LoggedUserUIState.Logged -> {
             user?.let { currentUser ->
-                val name = remember { mutableStateOf(currentUser.name) }
-                val email = remember { mutableStateOf(currentUser.email) }
 
                 Column(modifier = Modifier.padding(16.dp)) {
                     TextField(
-                        value = name.value,
-                        onValueChange = { name.value = it },
+                        value = name,
+                        onValueChange = { name = it },
                         label = { Text("Nombre") }
                     )
 
                     TextField(
-                        value = email.value,
-                        onValueChange = { email.value = it },
-                        label = { Text("Correo Electrónico") }
+                        value = avatarUrl,
+                        onValueChange = { avatarUrl = it },
+                        label = { Text("URL del Avatar") }
                     )
 
                     Button(
                         onClick = {
                             coroutineScope.launch {
-                                viewModel.updateUser(name.value, email.value)
+                                viewModel.updateProfile(name, avatarUrl.takeIf { it.isNotEmpty() })
                                 navController.popBackStack()
                             }
                         },
