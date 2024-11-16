@@ -5,21 +5,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import kotlinx.coroutines.launch
-import ar.edu.unlam.mobile.scaffolding.ui.components.ProfileHeader
 
 @Composable
 fun EditProfileScreen(
@@ -30,7 +22,6 @@ fun EditProfileScreen(
     val coroutineScope = rememberCoroutineScope()
     var user by remember { mutableStateOf<User?>(null) }
 
-    // Variables para el formulario de edición
     var name by remember { mutableStateOf("") }
     var avatarUrl by remember { mutableStateOf("") }
 
@@ -39,15 +30,16 @@ fun EditProfileScreen(
             user = viewModel.getCurrentUser()
             user?.let {
                 name = it.name
+                avatarUrl = it.avatar_url ?: ""
             }
         } catch (e: Exception) {
+
         }
     }
 
     when (logState.loggedUserUiState) {
         is LoggedUserUIState.Logged -> {
-            user?.let { currentUser ->
-
+            user?.let {
                 Column(modifier = Modifier.padding(16.dp)) {
                     TextField(
                         value = name,
@@ -64,8 +56,12 @@ fun EditProfileScreen(
                     Button(
                         onClick = {
                             coroutineScope.launch {
-                                viewModel.updateProfile(name, avatarUrl.takeIf { it.isNotEmpty() })
-                                navController.popBackStack()
+                                val updatedUser = viewModel.updateProfile(name, avatarUrl.takeIf { it.isNotEmpty() })
+                                if (updatedUser != null) {
+                                    user = updatedUser
+                                    navController.popBackStack()
+                                } else {
+                                }
                             }
                         },
                         modifier = Modifier.padding(top = 16.dp)

@@ -114,28 +114,17 @@ constructor(
         } ?: throw IllegalStateException("Usuario no autenticado")
     }
 
-    fun updateProfile(name: String, avatarUrl: String? = null, password: String? = null) {
-        viewModelScope.launch {
-            try {
-                val token = localDataRepository.getLoginToken()
-
-                if (token != null) {
-                    val updateProfileBody = UpdateProfileBodyDto(
-                        name = name,
-                        avatar_url = avatarUrl ?: "",
-                        password = password
-                    )
-                    val updatedUser = userLogin.updateProfile(token,updateProfileBody)
-
-                    updatedUser?.let {
-                        _name.value = it.name
-                        _email.value = it.email
-                    }
-                } else {
-                }
-            } catch (e: Exception) {
-                Log.e("LoginViewModel", "Error al actualizar perfil: ${e.message}")
+    suspend fun updateProfile(name: String, avatarUrl: String?): User? {
+        return try {
+            val token = localDataRepository.getLoginToken()
+            if (token != null) {
+                avatarUrl?.let { UpdateProfileBodyDto(name, it) }
+                    ?.let { userLogin.updateProfile(token, it) }
+            } else {
+                null
             }
+        } catch (e: Exception) {
+            null
         }
     }
 }
