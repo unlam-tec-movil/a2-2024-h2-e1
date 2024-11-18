@@ -2,10 +2,10 @@ package ar.edu.unlam.mobile.scaffolding.ui.di
 
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.PostNewTuitService
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.GetFeed
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.PostNewTuit
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.GetFeedUseCase
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.PostNewTuitUseCase
 import ar.edu.unlam.mobile.scaffolding.domain.user.services.GetUserService
-import ar.edu.unlam.mobile.scaffolding.domain.user.usecases.GetUserData
+import ar.edu.unlam.mobile.scaffolding.domain.user.usecases.GetUserDataUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,11 +15,11 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 abstract class ApiServiceModule {
     @Binds
-    abstract fun provideGetUserService(getUserService: GetUserData): GetUserService
+    abstract fun provideGetUserService(getUserService: GetUserService): GetUserDataUseCase
 
     @Binds
-    abstract fun provideNewTuitService(newTuitService: PostNewTuit): PostNewTuitService
+    abstract fun provideNewTuitService(newTuitService: PostNewTuitService): PostNewTuitUseCase
 
     @Binds
-    abstract fun provideTuitFeedService(newFeedService: GetFeed): GetFeedService
+    abstract fun provideTuitFeedService(newFeedService: GetFeedService): GetFeedUseCase
 }

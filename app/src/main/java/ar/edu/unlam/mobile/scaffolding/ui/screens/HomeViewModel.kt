@@ -5,7 +5,7 @@ import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.GetFeedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -33,7 +33,7 @@ data class TuitUIState(
 class HomeViewModel
     @Inject
     constructor(
-        private val feedService: GetFeedService,
+        private val feedService: GetFeedUseCase,
     ) : ViewModel() {
         private val _feedDataState = MutableStateFlow(TuitUIState(MutableStateFlow(TuitFeedUIState.Loading).value))
         val feedDataState = _feedDataState.asStateFlow()

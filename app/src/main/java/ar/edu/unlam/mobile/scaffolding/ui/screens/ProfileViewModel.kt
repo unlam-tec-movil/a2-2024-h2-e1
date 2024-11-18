@@ -7,9 +7,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
+import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.GetFeedUseCase
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
-import ar.edu.unlam.mobile.scaffolding.domain.user.services.GetUserService
+import ar.edu.unlam.mobile.scaffolding.domain.user.usecases.GetUserDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -38,8 +38,8 @@ data class ProfileUiState(
 class ProfileViewModel
     @Inject
     constructor(
-        private val getUserService: GetUserService,
-        private val feedService: GetFeedService,
+        private val getUserDataUseCase: GetUserDataUseCase,
+        private val feedService: GetFeedUseCase,
     ) : ViewModel() {
         private val _name = mutableStateOf("")
         private val _avatarUrl = mutableStateOf("")
@@ -64,7 +64,7 @@ class ProfileViewModel
         }
 
         private suspend fun getCurrentUser() {
-            val user = getUserService.getUserData()
+            val user = getUserDataUseCase.getUserData()
             feedService.getFeed(1)
 
             if (user != null) {
@@ -88,7 +88,7 @@ class ProfileViewModel
         fun updateProfile() {
             viewModelScope.launch {
                 try {
-                    val user = getUserService.updateProfile(_name.value, _avatarUrl.value)
+                    val user = getUserDataUseCase.updateProfile(_name.value, _avatarUrl.value)
                     getCurrentUser()
                 } catch (e: Exception) {
                     Log.e("ProfileViewModel", "Error al actualizar el perfil")
