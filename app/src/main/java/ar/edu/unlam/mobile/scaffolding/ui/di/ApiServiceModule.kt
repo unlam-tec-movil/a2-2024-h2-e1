@@ -1,5 +1,7 @@
 package ar.edu.unlam.mobile.scaffolding.ui.di
 
+import ar.edu.unlam.mobile.scaffolding.domain.favorites.service.FavoritesService
+import ar.edu.unlam.mobile.scaffolding.domain.favorites.usecase.FavoritesUseCase
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.DraftService
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.GetFeedService
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.services.LikeService
@@ -32,4 +34,7 @@ abstract class ApiServiceModule {
 
     @Binds
     abstract fun provideLikeService(likeServiceImplementation: LikeService): LikeUseCase
+
+    @Binds
+    abstract fun provideFavServices(draftService: FavoritesService): FavoritesUseCase
 }

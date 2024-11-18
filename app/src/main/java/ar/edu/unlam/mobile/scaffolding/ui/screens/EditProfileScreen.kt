@@ -22,7 +22,7 @@ fun EditProfileScreen(
     val name by viewModel.name
     val avatarUrl by viewModel.avatarUrl
 
-    when (val userData = userState.profileState) {
+    when (userState.profileState) {
         is ProfilePopulationState.Success -> {
             Column(modifier = Modifier.padding(16.dp)) {
                 TextField(
@@ -38,7 +38,10 @@ fun EditProfileScreen(
                 )
 
                 Button(
-                    onClick = { viewModel.updateProfile() },
+                    onClick = {
+                        viewModel.updateProfile()
+                        navController.navigate("profile")
+                    },
                     modifier = Modifier.padding(top = 16.dp),
                 ) {
                     Text(text = "Guardar Cambios")

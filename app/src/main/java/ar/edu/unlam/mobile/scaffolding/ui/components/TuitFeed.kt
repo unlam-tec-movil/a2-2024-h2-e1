@@ -22,6 +22,7 @@ import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 fun TuitFeed(
     tuits: List<Tuit>,
     likeEvent: (id: Tuit) -> Unit,
+    addFavorite: (name: String, avatarUrl: String) -> Unit,
     // viewModel: NewTuitViewModel
 ) {
     Surface(
@@ -42,23 +43,9 @@ fun TuitFeed(
             LazyColumn(modifier.padding(top = 10.dp)) {
                 // item { TweetComposer() }
                 items(tuits) { tuit ->
-                    TuitCard(likePost = likeEvent, tuit = tuit, modifier = Modifier.padding(1.dp))
+                    TuitCard(likePost = likeEvent, tuit = tuit, modifier = Modifier.padding(1.dp), addFavorite = addFavorite)
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun TuitProfile(
-    tuits: List<Tuit>,
-    likeEvent: (tuit: Tuit) -> Unit,
-) {
-    var modifier = Modifier.fillMaxSize()
-
-    LazyColumn(modifier.padding(top = 10.dp)) {
-        items(tuits) { tuit ->
-            TuitCard(likePost = likeEvent, tuit = tuit, modifier = Modifier.padding(1.dp))
         }
     }
 }

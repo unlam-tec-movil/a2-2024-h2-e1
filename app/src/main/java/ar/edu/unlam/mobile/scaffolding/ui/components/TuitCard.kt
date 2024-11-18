@@ -33,12 +33,13 @@ fun TuitCard(
     tuit: Tuit,
     modifier: Modifier = Modifier,
     likePost: (tuit: Tuit) -> Unit,
+    addFavorite: (name: String, avatarUrl: String) -> Unit,
     // viewModel: NewTuitViewModel
 ) {
     Card(
         modifier = modifier,
     ) {
-        Header(tuit = tuit)
+        Header(tuit = tuit, addFavorite = addFavorite)
         Box(modifier = Modifier.padding(8.dp)) {
             Column {
                 Row {
@@ -51,7 +52,10 @@ fun TuitCard(
 }
 
 @Composable
-fun Header(tuit: Tuit) {
+fun Header(
+    tuit: Tuit,
+    addFavorite: (name: String, avatarUrl: String) -> Unit,
+) {
     Row(
         modifier =
             Modifier
@@ -74,6 +78,9 @@ fun Header(tuit: Tuit) {
                 )
                 Text(text = "@" + tuit.author, Modifier.padding(horizontal = 10.dp), fontWeight = FontWeight.Black)
             }
+        }
+        Button(onClick = { addFavorite(tuit.author, tuit.avatar_url) }) {
+            Text("+Follow")
         }
     }
 }

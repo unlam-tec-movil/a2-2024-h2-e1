@@ -51,12 +51,6 @@ class ProfileViewModel
             MutableStateFlow(ProfileUiState(MutableStateFlow(ProfilePopulationState.Loading).value))
         val fetchUserState = _fetchUserState.asStateFlow()
 
-        fun likeButtonPressed(id: Int) {
-            viewModelScope.launch {
-                Log.i("ButtonLike", "Te gusta! el post $id")
-            }
-        }
-
         init {
             viewModelScope.launch {
                 getCurrentUser()
@@ -65,7 +59,7 @@ class ProfileViewModel
 
         private suspend fun getCurrentUser() {
             val user = getUserDataUseCase.getUserData()
-            feedService.getFeed(1)
+            feedService.getFeed()
 
             if (user != null) {
                 // Obtener los tuits filtrados por el correo del usuario

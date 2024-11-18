@@ -2,10 +2,11 @@ package ar.edu.unlam.mobile.scaffolding.data.local.repository
 
 import android.util.Log
 import ar.edu.unlam.mobile.scaffolding.data.local.LocalDataBase
-import ar.edu.unlam.mobile.scaffolding.data.local.entity.LocalUserEntity
+import ar.edu.unlam.mobile.scaffolding.data.local.entity.FavoriteUserEntity
 import ar.edu.unlam.mobile.scaffolding.data.local.entity.SavedMessageEntity
 import ar.edu.unlam.mobile.scaffolding.data.local.entity.asEntity
 import ar.edu.unlam.mobile.scaffolding.data.local.entity.asModel
+import ar.edu.unlam.mobile.scaffolding.domain.favorites.model.FavoriteUser
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.SavedMessage
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +22,7 @@ class RoomDataBaseRepository
         // Todo, recibir el dao por constructor
         private val localUsersDao = appDb.localUserDao()
         private val tuitDao = appDb.tuitDao()
+        private val favoriteUsersDao = appDb.favoriteUsersDao()
 
         override suspend fun listUsers(): Flow<List<User>> =
             localUsersDao.listUsers().map {
@@ -70,11 +72,16 @@ class RoomDataBaseRepository
             }
         }
 
-        override suspend fun updateUser()  {
-            var user: LocalUserEntity? = null
-            localUsersDao.listUsers().collect {
-                user = it.first()
-            }
-            localUsersDao.updateUser(user!!.name, user!!.avatar_url, user!!.id)
+        override suspend fun storeFavoriteUser(
+            name: String,
+            avatarUrl: String,
+        ) {
+            favoriteUsersDao.storeUser(FavoriteUserEntity(name = name, avatar_url = avatarUrl))
+        }
+
+        override fun getFavoritesUsers(): Flow<List<FavoriteUser>> = favoriteUsersDao.getFavoriteUsers()
+
+        override suspend fun deleteFavoriteUser(user: FavoriteUser) {
+            favoriteUsersDao.deleteFavoriteUser(user.id)
         }
     }
