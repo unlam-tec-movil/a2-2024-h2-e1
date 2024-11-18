@@ -27,7 +27,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import coil.compose.AsyncImage
 
@@ -35,7 +34,6 @@ import coil.compose.AsyncImage
 fun UserDetails(user: User, navController: NavController) {
     LazyColumn {
         item { ProfileHeader(user, navController) }
-        /*item { TuitProfile(tuits = tuits, likeEvent = likeEvent) }*/
     }
 }
 

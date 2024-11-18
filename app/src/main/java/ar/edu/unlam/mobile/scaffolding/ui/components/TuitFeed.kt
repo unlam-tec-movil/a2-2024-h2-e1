@@ -21,7 +21,8 @@ import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 @Composable
 fun TuitFeed(
     tuits: List<Tuit>,
-    likeEvent: (id: Int) -> Unit,
+    likeEvent: (id: Tuit) -> Unit,
+    // viewModel: NewTuitViewModel
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -51,7 +52,7 @@ fun TuitFeed(
 @Composable
 fun TuitProfile(
     tuits: List<Tuit>,
-    likeEvent: (id: Int) -> Unit,
+    likeEvent: (tuit: Tuit) -> Unit,
 ) {
     var modifier = Modifier.fillMaxSize()
 

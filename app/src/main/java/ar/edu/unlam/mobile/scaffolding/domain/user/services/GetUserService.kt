@@ -20,7 +20,7 @@ class GetUserService
             if (token != null) {
                 val user = api.getProfile(token.toString())
                 if (user != null && localDataBase.createUser(user)) {
-                    return (user)
+                    return(user)
                 }
             }
             return null

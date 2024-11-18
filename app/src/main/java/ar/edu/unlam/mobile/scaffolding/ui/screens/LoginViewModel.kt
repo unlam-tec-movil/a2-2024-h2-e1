@@ -5,9 +5,12 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.unlam.mobile.scaffolding.domain.login.services.UserLoginService
+import ar.edu.unlam.mobile.scaffolding.domain.login.services.UserRegistrationService
 import ar.edu.unlam.mobile.scaffolding.domain.login.usecases.UserLoginUseCase
 import ar.edu.unlam.mobile.scaffolding.domain.login.usecases.UserRegistrationUseCase
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
+import ar.edu.unlam.mobile.scaffolding.domain.user.services.GetUserService
 import ar.edu.unlam.mobile.scaffolding.domain.user.usecases.GetUserDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -49,7 +52,7 @@ class LoginViewModel
     constructor(
         private val userLogin: UserLoginUseCase,
         private val registrationService: UserRegistrationUseCase,
-        private val getUserDataUseCase: GetUserDataUseCase,
+        private val getUserService: GetUserDataUseCase,
     ) : ViewModel() {
         private val _email = mutableStateOf("")
         private val _password = mutableStateOf("")
@@ -78,7 +81,7 @@ class LoginViewModel
         fun logIn() {
             viewModelScope.launch {
                 if (userLogin.login(email = _email.value, password = _password.value)) {
-                    if (getUserDataUseCase.getUserData() != null) {
+                    if (getUserService.getUserData() != null) {
                         _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
                     }
                 }
@@ -93,7 +96,7 @@ class LoginViewModel
                         password = _password.value,
                     )
                 ) {
-                    if (getUserDataUseCase.getUserData() != null) {
+                    if (getUserService.getUserData() != null) {
                         _loggedState.value = IsLoggedUIState(LoggedUserUIState.Logged)
                     }
                 }

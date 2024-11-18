@@ -4,7 +4,7 @@ import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import com.squareup.moshi.Json
 import javax.inject.Inject
 
-data class FeedResponseDto
+class TuitResponseDto
     @Inject
     constructor(
         @Json(name = "id")
@@ -25,8 +25,7 @@ data class FeedResponseDto
         val date: String,
     )
 
-fun FeedResponseDto.toDomain(): Tuit =
-
+fun TuitResponseDto.toDomain(): Tuit =
     Tuit(
         id = this.id,
         message = this.message,

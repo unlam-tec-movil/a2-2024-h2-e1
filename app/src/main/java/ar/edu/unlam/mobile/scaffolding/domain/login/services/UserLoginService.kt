@@ -1,10 +1,8 @@
 package ar.edu.unlam.mobile.scaffolding.domain.login.services
 
 import ar.edu.unlam.mobile.scaffolding.data.local.repository.LocalDataRepository
-import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.UpdateProfileBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.repository.ApiRepository
 import ar.edu.unlam.mobile.scaffolding.domain.login.usecases.UserLoginUseCase
-import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import javax.inject.Inject
 
 class UserLoginService
@@ -21,9 +19,4 @@ class UserLoginService
             localData.saveLoginToken(response.token)
             return true
         }
-
-        override suspend fun updateProfile(
-            token: String,
-            updateProfileBody: UpdateProfileBodyDto,
-        ): User? = api.updateProfile(token, updateProfileBody)
     }

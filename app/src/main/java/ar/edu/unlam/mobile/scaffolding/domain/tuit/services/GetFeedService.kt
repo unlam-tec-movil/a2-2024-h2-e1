@@ -12,15 +12,14 @@ class GetFeedService
         private val api: ApiRepository,
         private val localData: LocalDataRepository,
     ) : GetFeedUseCase {
-        override suspend fun getFeed(page: Int): List<Tuit>? {
+        override suspend fun getFeed(): List<Tuit>? {
             val token = localData.getLoginToken()
             token == null && return emptyList()
-            val tuitList = api.getFeed(page, token.toString())
-            return tuitList
+            return api.getFeed(1, token.toString())
         }
 
         override suspend fun getUserTuitsByEmail(name: String): List<Tuit>? {
-            val tuits = this.getFeed(1)?.filter { it.author == name }
+            val tuits = this.getFeed()?.filter { it.author == name }
             return tuits
         }
     }

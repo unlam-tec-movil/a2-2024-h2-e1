@@ -17,6 +17,7 @@ fun ProfileScreen(
     viewModel: ProfileViewModel = hiltViewModel(),
     newTuitViewModel: NewTuitViewModel = hiltViewModel(),
     navController: NavController,
+    homeviewModel: HomeViewModel = hiltViewModel(),
     modifier: Modifier,
 ) {
     val userState: ProfileUiState by viewModel.fetchUserState.collectAsState()
@@ -29,7 +30,7 @@ fun ProfileScreen(
                 profileData.tuits?.let { tuits ->
                     TuitFeed(
                         tuits = tuits,
-                        likeEvent = { tuitId -> viewModel.likeButtonPressed(tuitId) },
+                        likeEvent = { homeviewModel.likeButtonPressed(it) },
                     )
                 }
             }
