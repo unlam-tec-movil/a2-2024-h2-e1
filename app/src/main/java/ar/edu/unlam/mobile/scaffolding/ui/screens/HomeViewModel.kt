@@ -3,7 +3,6 @@ package ar.edu.unlam.mobile.scaffolding.ui.screens
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ar.edu.unlam.mobile.scaffolding.domain.pagination.usecases.PaginationManagerInterface
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.GetFeedUseCase
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.LikeUseCase
@@ -36,7 +35,7 @@ class HomeViewModel
     constructor(
         private val feedService: GetFeedUseCase,
         private val likeUseCase: LikeUseCase,
-        private val paginationService: PaginationManagerInterface,
+        // private val paginationService: PaginationManagerInterface,
     ) : ViewModel() {
         private val _feedDataState = MutableStateFlow(TuitUIState(MutableStateFlow(TuitFeedUIState.Loading).value))
         val feedDataState = _feedDataState.asStateFlow()
