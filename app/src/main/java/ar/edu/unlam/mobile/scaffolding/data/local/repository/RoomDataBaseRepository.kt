@@ -2,6 +2,7 @@ package ar.edu.unlam.mobile.scaffolding.data.local.repository
 
 import android.util.Log
 import ar.edu.unlam.mobile.scaffolding.data.local.LocalDataBase
+import ar.edu.unlam.mobile.scaffolding.data.local.entity.LocalUserEntity
 import ar.edu.unlam.mobile.scaffolding.data.local.entity.asEntity
 import ar.edu.unlam.mobile.scaffolding.data.local.entity.asModel
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
@@ -33,5 +34,13 @@ class RoomDataBaseRepository
                 Log.i("RoomDataBaseRepository", "Error creating user: $e")
                 return false
             }
+        }
+
+        override suspend fun updateUser()  {
+            var user: LocalUserEntity? = null
+            localUsersDao.listUsers().collect {
+                user = it.first()
+            }
+            localUsersDao.updateUser(user!!.name, user!!.avatar_url, user!!.id)
         }
     }

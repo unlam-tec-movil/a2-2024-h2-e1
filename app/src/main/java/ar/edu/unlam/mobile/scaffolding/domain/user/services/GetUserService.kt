@@ -4,4 +4,9 @@ import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 
 interface GetUserService {
     suspend fun getUserData(): User?
+
+    suspend fun updateProfile(
+        name: String,
+        avatarUrl: String,
+    ): User?
 }

@@ -10,74 +10,46 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
-import kotlinx.coroutines.launch
+import ar.edu.unlam.mobile.scaffolding.ui.components.Loader
 
 @Composable
 fun EditProfileScreen(
     navController: NavController,
-    viewModel: LoginViewModel = hiltViewModel(),
+    viewModel: ProfileViewModel = hiltViewModel(),
 ) {
-    val logState by viewModel.loggedState.collectAsState()
-    val coroutineScope = rememberCoroutineScope()
-    var user by remember { mutableStateOf<User?>(null) }
+    val userState: ProfileUiState by viewModel.fetchUserState.collectAsState()
 
-    var name by remember { mutableStateOf("") }
-    var avatarUrl by remember { mutableStateOf("") }
+    val name by viewModel.name
+    val avatarUrl by viewModel.avatarUrl
 
-    LaunchedEffect(Unit) {
-        try {
-            user = viewModel.getCurrentUser()
-            user?.let {
-                name = it.name
-                avatarUrl = it.avatar_url ?: ""
-            }
-        } catch (e: Exception) {
+    when (val userData = userState.profileState) {
+        is ProfilePopulationState.Success -> {
+            Column(modifier = Modifier.padding(16.dp)) {
+                TextField(
+                    value = name,
+                    onValueChange = { viewModel.setName(it) },
+                    label = { Text("Nombre") },
+                )
 
-        }
-    }
+                TextField(
+                    value = avatarUrl,
+                    onValueChange = { viewModel.setAvatar(it) },
+                    label = { Text("URL del Avatar") },
+                )
 
-    when (logState.loggedUserUiState) {
-        is LoggedUserUIState.Logged -> {
-            user?.let {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    TextField(
-                        value = name,
-                        onValueChange = { name = it },
-                        label = { Text("Nombre") }
-                    )
-
-                    TextField(
-                        value = avatarUrl,
-                        onValueChange = { avatarUrl = it },
-                        label = { Text("URL del Avatar") }
-                    )
-
-                    Button(
-                        onClick = {
-                            coroutineScope.launch {
-                                val updatedUser = viewModel.updateProfile(name, avatarUrl.takeIf { it.isNotEmpty() })
-                                if (updatedUser != null) {
-                                    user = updatedUser
-                                    navController.popBackStack()
-                                } else {
-                                }
-                            }
-                        },
-                        modifier = Modifier.padding(top = 16.dp)
-                    ) {
-                        Text(text = "Guardar Cambios")
-                    }
+                Button(
+                    onClick = { viewModel.updateProfile() },
+                    modifier = Modifier.padding(top = 16.dp),
+                ) {
+                    Text(text = "Guardar Cambios")
                 }
-            } ?: Text(text = "Error al cargar el usuario")
+            }
         }
-
-        LoggedUserUIState.NotLogged -> {
-            Text(text = "Usuario no autenticado")
+        is ProfilePopulationState.Loading -> {
+            Loader()
         }
-
-        else -> {
-            Text(text = "Cargando...")
+        is ProfilePopulationState.Error -> {
+            Text(text = "Error")
         }
     }
 }

@@ -13,4 +13,11 @@ interface LocalUserDao {
 
     @Insert
     suspend fun createUser(android: LocalUserEntity)
+
+    @Query("UPDATE users SET name = :name, avatar_url = :avatar where id = :id")
+    fun updateUser(
+        name: String,
+        avatar: String,
+        id: Int,
+    )
 }

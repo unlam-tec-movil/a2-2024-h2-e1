@@ -19,20 +19,20 @@ fun ProfileScreen(
     navController: NavController,
     modifier: Modifier,
 ) {
-    val logState: ProfileUiState by viewModel.fetchUserState.collectAsState()
+    val userState: ProfileUiState by viewModel.fetchUserState.collectAsState()
     val textMessage by newTuitViewModel.message
 
-    when (val profileData = logState.profileState) {
+    when (val profileData = userState.profileState) {
         is ProfilePopulationState.Success -> {
-            Column (modifier = modifier){
-            UserDetails(profileData.user,navController)
+            Column(modifier = modifier) {
+                UserDetails(profileData.user, navController)
                 profileData.tuits?.let { tuits ->
                     TuitFeed(
                         tuits = tuits,
-                        likeEvent = { tuitId -> viewModel.likeButtonPressed(tuitId) }
-                    ) }
+                        likeEvent = { tuitId -> viewModel.likeButtonPressed(tuitId) },
+                    )
+                }
             }
-
         }
 
         is ProfilePopulationState.Loading -> {
