@@ -12,6 +12,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.MailOutline
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -103,6 +106,22 @@ fun BottomOptions(
             },
         ) {
             Icon(icon, contentDescription = contentDescription)
+        }
+
+        Button(
+            onClick = {
+
+            },
+        ) {
+            Icon(Icons.Outlined.MailOutline, contentDescription="")
+        }
+
+        Button(
+            onClick = {
+
+            },
+        ) {
+            Icon(Icons.Outlined.Share, contentDescription = "")
         }
     }
 }

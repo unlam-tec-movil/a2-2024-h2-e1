@@ -233,7 +233,7 @@ capturar el valor recibido y pasarseló al composable como parámetro.
 Veamos un ejemplo:
 
 ```kotlin
-NavHost(navController = controller, startDestination = "home") {
+/*NavHost(navController = controller, startDestination = "home") {
     // composable es el componente que se usa para definir un destino de navegación.
     // Por parámetro recibe la ruta que se utilizará para navegar a dicho destino.
     composable("home") {
@@ -247,7 +247,7 @@ NavHost(navController = controller, startDestination = "home") {
         val id = navBackStackEntry.arguments?.getInt("id") ?: 1
         SecondaryScreen(controller = controller, id = id)
     }
-}
+}*/
 ```
 
 En el ejemplo tenemos dos rutas definidas. Una "home" y otra "segundo/{id}". La primera no recibe
