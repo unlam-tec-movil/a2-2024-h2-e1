@@ -30,12 +30,7 @@ fun Homescreen(
             TuitFeed(
                 feedState.tuits,
                 likeEvent = { viewModel.likeButtonPressed(it) },
-                addFavorite = {
-                    name,
-                    avatarUrl,
-                    ->
-                    viewModel.addToFavorite(name, avatarUrl)
-                },
+                addFavorite = viewModel::addToFavorite,
             )
         }
 
