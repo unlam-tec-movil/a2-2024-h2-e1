@@ -42,7 +42,7 @@ fun DraftList(
                         Card(Modifier.fillMaxWidth().padding(4.dp)) {
                             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                                 Column(Modifier.padding(8.dp)) {
-                                    Text(text = "id: " + draft.id.toString())
+                                    Text(text = "Borrador: " + draft.id.toString())
                                     Text(draft.text)
                                 }
                                 Column {
