@@ -40,10 +40,14 @@ fun TuitFeed(
             )
             var modifier = Modifier.fillMaxSize()
 
-            LazyColumn(modifier.padding(top = 10.dp,
-                                         bottom = 80.dp,
-                                         start = 10.dp,
-                                         end = 10.dp )) {
+            LazyColumn(
+                modifier.padding(
+                    top = 10.dp,
+                    bottom = 80.dp,
+                    start = 10.dp,
+                    end = 10.dp,
+                ),
+            ) {
                 // item { TweetComposer() }
                 items(tuits) { tuit ->
                     TuitCard(likePost = likeEvent, tuit = tuit, modifier = Modifier.padding(1.dp), addFavorite = addFavorite)

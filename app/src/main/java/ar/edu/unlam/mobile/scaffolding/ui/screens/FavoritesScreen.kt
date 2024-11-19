@@ -40,44 +40,48 @@ fun FavoritesScreen(
         is FavoritesUIState.Success -> {
             Box(modifier = Modifier.fillMaxSize()) {
                 Column {
-                Text(text = "Usuarios seguidos",
-                    fontSize = 24.sp,
-                    modifier = Modifier
-                        .padding(top = 16.dp, start = 16.dp, bottom = 20.dp)
-                        .align(Alignment.Start) )
-                LazyColumn(
-                    modifier.padding(
-                        top = 10.dp,
-                        bottom = 80.dp,
-                        start = 10.dp,
-                        end = 10.dp
+                    Text(
+                        text = "Usuarios seguidos",
+                        fontSize = 24.sp,
+                        modifier =
+                            Modifier
+                                .padding(top = 16.dp, start = 16.dp, bottom = 20.dp)
+                                .align(Alignment.Start),
                     )
-                ) {
-                    items(favState.favorites) { fav ->
-                        Card{
-                            Row(
-                                modifier = Modifier.fillMaxWidth()
-                                                   .padding(top = 8.dp, start = 16.dp, bottom = 8.dp, end = 16.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                AsyncImage(
-                                    contentDescription = "profile picture",
-                                    contentScale = ContentScale.Crop,
-                                    model = fav.avatarUrl,
+                    LazyColumn(
+                        modifier.padding(
+                            top = 10.dp,
+                            bottom = 80.dp,
+                            start = 10.dp,
+                            end = 10.dp,
+                        ),
+                    ) {
+                        items(favState.favorites) { fav ->
+                            Card {
+                                Row(
                                     modifier =
-                                    Modifier
-                                        .clip(CircleShape)
-                                        .size(60.dp)
-                                        .width(60.dp)
-                                        ,
-                                )
-                                Text(text = fav.name, Modifier.padding(horizontal = 10.dp))
+                                        Modifier
+                                            .fillMaxWidth()
+                                            .padding(top = 8.dp, start = 16.dp, bottom = 8.dp, end = 16.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    AsyncImage(
+                                        contentDescription = "profile picture",
+                                        contentScale = ContentScale.Crop,
+                                        model = fav.avatarUrl,
+                                        modifier =
+                                            Modifier
+                                                .clip(CircleShape)
+                                                .size(60.dp)
+                                                .width(60.dp),
+                                    )
+                                    Text(text = fav.name, Modifier.padding(horizontal = 10.dp))
+                                }
                             }
+                            Spacer(modifier = Modifier.height(8.dp))
                         }
-                        Spacer(modifier = Modifier.height(8.dp))
                     }
                 }
-            }
             }
         }
         is FavoritesUIState.Error -> Text(favState.message)

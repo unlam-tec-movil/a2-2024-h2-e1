@@ -117,13 +117,17 @@ class ApiRepository
                 return null
             }
         }
-    suspend fun updateProfile(token: String, updateProfileBody: UpdateProfileBodyDto): User? {
-        try {
-            val response = api.updateProfile(token, updateProfileBody)
-            return response.toDomain()
-        } catch (e: Exception) {
-            Log.e("ApiRepository", "Error al actualizar perfil: ${e.message}")
-            return null
+
+        suspend fun updateProfile(
+            token: String,
+            updateProfileBody: UpdateProfileBodyDto,
+        ): User? {
+            try {
+                val response = api.updateProfile(token, updateProfileBody)
+                return response.toDomain()
+            } catch (e: Exception) {
+                Log.e("ApiRepository", "Error al actualizar perfil: ${e.message}")
+                return null
+            }
         }
-    }
     }

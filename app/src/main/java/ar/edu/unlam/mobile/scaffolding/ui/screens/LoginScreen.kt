@@ -110,12 +110,12 @@ fun LoginForm(
                     fontSize = 18.sp,
                     modifier = Modifier.width(200.dp),
                     style =
-                    TextStyle(
-                        brush =
-                        Brush.linearGradient(
-                            colors = gradientColors,
+                        TextStyle(
+                            brush =
+                                Brush.linearGradient(
+                                    colors = gradientColors,
+                                ),
                         ),
-                    ),
                 )
                 Text(
                     text = "Registrate",
@@ -123,12 +123,12 @@ fun LoginForm(
                     fontSize = 22.sp,
                     modifier = Modifier.width(200.dp),
                     style =
-                    TextStyle(
-                        brush =
-                        Brush.linearGradient(
-                            colors = gradientColors,
+                        TextStyle(
+                            brush =
+                                Brush.linearGradient(
+                                    colors = gradientColors,
+                                ),
                         ),
-                    ),
                 )
             }
         }

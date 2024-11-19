@@ -1,6 +1,5 @@
 package ar.edu.unlam.mobile.scaffolding.data.network.api
 
-import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.FeedResponseDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.LoginBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostResponseDto
@@ -52,13 +51,13 @@ interface NotTwitterApiClient {
         @Header("Authorization") token: String,
     ): List<TuitResponseDto>
 
-
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
     @PUT("me/profile")
     suspend fun updateProfile(
         @Header("Authorization") token: String,
-        @Body body: UpdateProfileBodyDto
+        @Body body: UpdateProfileBodyDto,
     ): ProfileResponseDto
+
     @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
     @POST("me/tuits/{tuit_id}/likes")
     suspend fun likePost(

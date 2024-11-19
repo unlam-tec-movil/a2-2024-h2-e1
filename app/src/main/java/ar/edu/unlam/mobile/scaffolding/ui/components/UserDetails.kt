@@ -31,7 +31,10 @@ import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import coil.compose.AsyncImage
 
 @Composable
-fun UserDetails(user: User, navController: NavController) {
+fun UserDetails(
+    user: User,
+    navController: NavController,
+) {
     LazyColumn {
         item { ProfileHeader(user, navController) }
     }

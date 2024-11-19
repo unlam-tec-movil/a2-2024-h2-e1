@@ -7,11 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,20 +31,26 @@ fun EditProfileScreen(
 
     when (userState.profileState) {
         is ProfilePopulationState.Success -> {
-            Column(modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-                verticalArrangement = Arrangement.Center) {
-                Text(text = "Editar perfil",
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                verticalArrangement = Arrangement.Center,
+            ) {
+                Text(
+                    text = "Editar perfil",
                     fontSize = 24.sp,
-                    modifier = Modifier
-                        .padding(top = 16.dp, bottom = 20.dp)
-                        .align(Alignment.CenterHorizontally) )
+                    modifier =
+                        Modifier
+                            .padding(top = 16.dp, bottom = 20.dp)
+                            .align(Alignment.CenterHorizontally),
+                )
                 OutlinedTextField(
                     value = name,
                     onValueChange = { viewModel.setName(it) },
                     label = { Text("Nombre") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 OutlinedTextField(
@@ -60,8 +64,10 @@ fun EditProfileScreen(
                         viewModel.updateProfile()
                         navController.navigate("profile")
                     },
-                    modifier = Modifier.padding(top = 16.dp)
-                                       .align(Alignment.CenterHorizontally),
+                    modifier =
+                        Modifier
+                            .padding(top = 16.dp)
+                            .align(Alignment.CenterHorizontally),
                 ) {
                     Text(text = "Guardar cambios")
                 }

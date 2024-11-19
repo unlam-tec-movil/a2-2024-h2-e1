@@ -28,8 +28,8 @@ fun Homescreen(
 
         is TuitFeedUIState.Success -> {
             TuitFeed(feedState.tuits, likeEvent = { viewModel.likeButtonPressed(it) }, addFavorite = {
-                    name,
-                    avatarUrl,
+                name,
+                avatarUrl,
                 ->
                 viewModel.addToFavorite(name, avatarUrl)
             })

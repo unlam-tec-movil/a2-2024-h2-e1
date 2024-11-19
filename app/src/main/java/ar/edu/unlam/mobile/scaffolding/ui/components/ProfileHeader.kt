@@ -23,7 +23,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun ProfileHeader(user: ar.edu.unlam.mobile.scaffolding.domain.user.models.User, navController: NavController) {
+fun ProfileHeader(
+    user: ar.edu.unlam.mobile.scaffolding.domain.user.models.User,
+    navController: NavController,
+) {
     Column(
         modifier =
             Modifier
@@ -66,7 +69,7 @@ fun ProfileHeader(user: ar.edu.unlam.mobile.scaffolding.domain.user.models.User,
             Icon(
                 imageVector = Icons.Default.Edit,
                 contentDescription = "Editar perfil",
-                modifier = Modifier.padding(end = 8.dp)
+                modifier = Modifier.padding(end = 8.dp),
             )
             Text(text = "Editar Perfil")
         }

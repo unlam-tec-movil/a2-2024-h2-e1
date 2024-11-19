@@ -39,7 +39,8 @@ class HomeViewModel
         private val feedService: GetFeedUseCase,
         private val favoritesService: FavoritesUseCase,
     ) : ViewModel() {
-        private val _feedDataState = MutableStateFlow(TuitUIState(MutableStateFlow(TuitFeedUIState.Loading).value))
+        private val _feedDataState =
+            MutableStateFlow(TuitUIState(MutableStateFlow(TuitFeedUIState.Loading).value))
         val feedDataState = _feedDataState.asStateFlow()
 
         init {
