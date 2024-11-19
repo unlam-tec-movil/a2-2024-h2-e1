@@ -91,7 +91,7 @@ fun LoginForm(
         OutlinedTextField(
             value = password,
             onValueChange = viewModel::setPassword,
-            label = { Text("password") },
+            label = { Text("Password") },
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -101,21 +101,36 @@ fun LoginForm(
         ) {
             Text("Log In")
         }
-
-        Surface(onClick = { navController.navigate("register") }) {
-            Text(
-                text = "No tienes una cuenta? Registrate",
-                textAlign = TextAlign.Center,
-                fontSize = 24.sp,
-                modifier = Modifier.width(200.dp),
-                style =
-                    TextStyle(
-                        brush =
-                            Brush.linearGradient(
-                                colors = gradientColors,
-                            ),
-                    ),
-            )
+        Spacer(modifier = Modifier.height(20.dp))
+        Surface(onClick = { navController.navigate("Register") }) {
+            Column {
+                Text(
+                    text = "¿No tienes una cuenta?",
+                    textAlign = TextAlign.Center,
+                    fontSize = 18.sp,
+                    modifier = Modifier.width(200.dp),
+                    style =
+                        TextStyle(
+                            brush =
+                                Brush.linearGradient(
+                                    colors = gradientColors,
+                                ),
+                        ),
+                )
+                Text(
+                    text = "Registrate",
+                    textAlign = TextAlign.Center,
+                    fontSize = 22.sp,
+                    modifier = Modifier.width(200.dp),
+                    style =
+                        TextStyle(
+                            brush =
+                                Brush.linearGradient(
+                                    colors = gradientColors,
+                                ),
+                        ),
+                )
+            }
         }
     }
 }

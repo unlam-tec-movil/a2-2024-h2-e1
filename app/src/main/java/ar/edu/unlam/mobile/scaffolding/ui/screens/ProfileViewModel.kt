@@ -2,6 +2,8 @@ package ar.edu.unlam.mobile.scaffolding.ui.screens
 
 import android.util.Log
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
@@ -36,45 +38,63 @@ data class ProfileUiState(
 class ProfileViewModel
     @Inject
     constructor(
-        private val getUserService: GetUserDataUseCase,
+        private val getUserDataUseCase: GetUserDataUseCase,
         private val feedService: GetFeedUseCase,
     ) : ViewModel() {
-        private val _fetchUserState =
-            MutableStateFlow(
-                ProfileUiState(
-                    MutableStateFlow(ProfilePopulationState.Loading).value,
-                ),
-            )
-        val fetchUserState = _fetchUserState.asStateFlow()
+        private val _name = mutableStateOf("")
+        private val _avatarUrl = mutableStateOf("")
 
-        /*fun likeButtonPressed(id: Int) {
-            viewModelScope.launch {
-                Log.i("ButtonLike", "Te gusta! el post $id")
-            }
-        }*/
+        val name: State<String> = _name
+        val avatarUrl: State<String> = _avatarUrl
+
+        private val _fetchUserState =
+            MutableStateFlow(ProfileUiState(MutableStateFlow(ProfilePopulationState.Loading).value))
+        val fetchUserState = _fetchUserState.asStateFlow()
 
         init {
             viewModelScope.launch {
+                getCurrentUser()
+            }
+        }
 
-                val user = getUserService.getUserData()
-                val tuits = feedService.getFeed()
+        private suspend fun getCurrentUser() {
+            val user = getUserDataUseCase.getUserData()
+            feedService.getFeed()
 
-                if (user != null) {
-                    Log.d("ProfileViewModel", "User data: $user")
-                    val tuits = feedService.getUserTuitsByEmail(user.name)
+            if (user != null) {
+                // Obtener los tuits filtrados por el correo del usuario
+                val tuits = feedService.getUserTuitsByEmail(user.name)
+                _name.value = user.name
+                _avatarUrl.value = user.avatar_url
 
-                    if (tuits != null) {
-                        // Si se encuentran los tuits, actualizamos el estado
-                        _fetchUserState.value = ProfileUiState(ProfilePopulationState.Success(user, tuits))
-                    } else {
-                        // Si no se encuentran tuits, mostramos un error
-                        Log.d("ProfileViewModel", "Error: No user data found")
-                        _fetchUserState.value = ProfileUiState(ProfilePopulationState.Error("Error al cargar tuits"))
-                    }
+                if (tuits != null) {
+                    _fetchUserState.value = ProfileUiState(ProfilePopulationState.Success(user, tuits))
                 } else {
-                    // Si no se encuentra el usuario, mostramos un error
-                    _fetchUserState.value = ProfileUiState(ProfilePopulationState.Error("Error al cargar perfil"))
+                    _fetchUserState.value =
+                        ProfileUiState(ProfilePopulationState.Error("Error al cargar tuits"))
+                }
+            } else {
+                _fetchUserState.value =
+                    ProfileUiState(ProfilePopulationState.Error("Error al cargar perfil"))
+            }
+        }
+
+        fun updateProfile() {
+            viewModelScope.launch {
+                try {
+                    val user = getUserDataUseCase.updateProfile(_name.value, _avatarUrl.value)
+                    getCurrentUser()
+                } catch (e: Exception) {
+                    Log.e("ProfileViewModel", "Error al actualizar el perfil")
                 }
             }
+        }
+
+        fun setAvatar(it: String) {
+            _avatarUrl.value = it
+        }
+
+        fun setName(it: String) {
+            _name.value = it
         }
     }

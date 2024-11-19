@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,9 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun ProfileHeader(user: ar.edu.unlam.mobile.scaffolding.domain.user.models.User) {
+fun ProfileHeader(
+    user: ar.edu.unlam.mobile.scaffolding.domain.user.models.User,
+    navController: NavController,
+) {
     Column(
         modifier =
             Modifier
@@ -53,15 +59,22 @@ fun ProfileHeader(user: ar.edu.unlam.mobile.scaffolding.domain.user.models.User)
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Row(
+        Button(
+            onClick = {
+                // Navegar a la pantalla de edición de perfil
+                navController.navigate("editProfile")
+            },
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text(
-                text = "Siguiendo",
-                modifier = Modifier.padding(end = 16.dp),
+            Icon(
+                imageVector = Icons.Default.Edit,
+                contentDescription = "Editar perfil",
+                modifier = Modifier.padding(end = 8.dp),
             )
-            Text(text = "Seguidores")
+            Text(text = "Editar Perfil")
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         Divider(modifier = Modifier.padding(vertical = 16.dp))
     }

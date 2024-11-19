@@ -2,6 +2,7 @@ package ar.edu.unlam.mobile.scaffolding.domain.user.services
 
 import ar.edu.unlam.mobile.scaffolding.data.local.repository.LocalDataRepository
 import ar.edu.unlam.mobile.scaffolding.data.local.repository.RoomDataBaseRepository
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.UpdateProfileBodyDto
 import ar.edu.unlam.mobile.scaffolding.data.network.repository.ApiRepository
 import ar.edu.unlam.mobile.scaffolding.domain.user.models.User
 import ar.edu.unlam.mobile.scaffolding.domain.user.usecases.GetUserDataUseCase
@@ -23,5 +24,17 @@ class GetUserService
                 }
             }
             return null
+        }
+
+        override suspend fun updateProfile(
+            name: String,
+            avatarUrl: String,
+        ): User? {
+            val token = localData.getLoginToken()
+            if (token != null) {
+                return api.updateProfile(token, UpdateProfileBodyDto(name, avatarUrl))
+            } else {
+                return null
+            }
         }
     }

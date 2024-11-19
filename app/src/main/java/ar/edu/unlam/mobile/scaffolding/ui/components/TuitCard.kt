@@ -15,6 +15,7 @@ import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,16 +34,21 @@ fun TuitCard(
     tuit: Tuit,
     modifier: Modifier = Modifier,
     likePost: (tuit: Tuit) -> Unit,
+    addFavorite: (name: String, avatarUrl: String) -> Unit,
     // viewModel: NewTuitViewModel
 ) {
     Card(
         modifier = modifier,
     ) {
-        Header(tuit = tuit)
+        Header(tuit = tuit, addFavorite = addFavorite)
         Box(modifier = Modifier.padding(8.dp)) {
             Column {
                 Row {
-                    Text(tuit.message, fontSize = 24.sp)
+                    Text(
+                        tuit.message,
+                        fontSize = 24.sp,
+                        modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+                    )
                 }
             }
         }
@@ -51,7 +57,10 @@ fun TuitCard(
 }
 
 @Composable
-fun Header(tuit: Tuit) {
+fun Header(
+    tuit: Tuit,
+    addFavorite: (name: String, avatarUrl: String) -> Unit,
+) {
     Row(
         modifier =
             Modifier
@@ -74,6 +83,9 @@ fun Header(tuit: Tuit) {
                 )
                 Text(text = "@" + tuit.author, Modifier.padding(horizontal = 10.dp), fontWeight = FontWeight.Black)
             }
+        }
+        OutlinedButton(onClick = { addFavorite(tuit.author, tuit.avatar_url) }) {
+            Text("+ Follow")
         }
     }
 }

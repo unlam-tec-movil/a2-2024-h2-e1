@@ -3,7 +3,7 @@ package ar.edu.unlam.mobile.scaffolding.ui.screens
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ar.edu.unlam.mobile.scaffolding.domain.pagination.usecases.PaginationManagerInterface
+import ar.edu.unlam.mobile.scaffolding.domain.favorites.usecase.FavoritesUseCase
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.Tuit
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.GetFeedUseCase
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.LikeUseCase
@@ -34,11 +34,13 @@ data class TuitUIState(
 class HomeViewModel
     @Inject
     constructor(
-        private val feedService: GetFeedUseCase,
         private val likeUseCase: LikeUseCase,
-        private val paginationService: PaginationManagerInterface,
+        // private val paginationService: PaginationManagerInterface,
+        private val feedService: GetFeedUseCase,
+        private val favoritesService: FavoritesUseCase,
     ) : ViewModel() {
-        private val _feedDataState = MutableStateFlow(TuitUIState(MutableStateFlow(TuitFeedUIState.Loading).value))
+        private val _feedDataState =
+            MutableStateFlow(TuitUIState(MutableStateFlow(TuitFeedUIState.Loading).value))
         val feedDataState = _feedDataState.asStateFlow()
 
         init {
@@ -47,6 +49,15 @@ class HomeViewModel
                 if (tuits != null) {
                     _feedDataState.value = TuitUIState(TuitFeedUIState.Success(tuits))
                 }
+            }
+        }
+
+        fun addToFavorite(
+            name: String,
+            avatarUrl: String,
+        ) {
+            viewModelScope.launch {
+                favoritesService.addToFavorites(name, avatarUrl)
             }
         }
 

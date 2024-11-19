@@ -7,6 +7,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import ar.edu.unlam.mobile.scaffolding.ui.components.Loader
 import ar.edu.unlam.mobile.scaffolding.ui.components.TuitFeed
 import ar.edu.unlam.mobile.scaffolding.ui.components.UserDetails
@@ -14,19 +15,23 @@ import ar.edu.unlam.mobile.scaffolding.ui.components.UserDetails
 @Composable
 fun ProfileScreen(
     viewModel: ProfileViewModel = hiltViewModel(),
+    newTuitViewModel: NewTuitViewModel = hiltViewModel(),
+    navController: NavController,
     homeviewModel: HomeViewModel = hiltViewModel(),
     modifier: Modifier,
 ) {
-    val logState: ProfileUiState by viewModel.fetchUserState.collectAsState()
+    val userState: ProfileUiState by viewModel.fetchUserState.collectAsState()
+    val textMessage by newTuitViewModel.message
 
-    when (val profileData = logState.profileState) {
+    when (val profileData = userState.profileState) {
         is ProfilePopulationState.Success -> {
             Column(modifier = modifier) {
-                UserDetails(profileData.user)
+                UserDetails(profileData.user, navController)
                 profileData.tuits?.let { tuits ->
                     TuitFeed(
                         tuits = tuits,
                         likeEvent = { homeviewModel.likeButtonPressed(it) },
+                        addFavorite = homeviewModel::addToFavorite,
                     )
                 }
             }

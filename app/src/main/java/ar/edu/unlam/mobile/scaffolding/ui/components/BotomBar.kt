@@ -3,6 +3,7 @@ package ar.edu.unlam.mobile.scaffolding.ui.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -37,6 +38,17 @@ fun BottomBar(controller: NavHostController) {
                 Icon(
                     imageVector = Icons.Default.AccountCircle,
                     contentDescription = "Tu Cuenta",
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            },
+        )
+        NavigationBarItem(
+            selected = navBackStackEntry?.destination?.hierarchy?.any { it.route == "favorites" } == true,
+            onClick = { controller.navigate("favorites") },
+            icon = {
+                Icon(
+                    imageVector = Icons.Filled.Star,
+                    contentDescription = "Favoritos",
                     tint = MaterialTheme.colorScheme.primary,
                 )
             },

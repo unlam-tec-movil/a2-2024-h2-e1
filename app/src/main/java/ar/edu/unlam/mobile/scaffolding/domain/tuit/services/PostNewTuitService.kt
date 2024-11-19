@@ -2,6 +2,7 @@ package ar.edu.unlam.mobile.scaffolding.domain.tuit.services
 
 import android.util.Log
 import ar.edu.unlam.mobile.scaffolding.data.local.repository.LocalDataRepository
+import ar.edu.unlam.mobile.scaffolding.data.local.repository.RoomDataBaseRepository
 import ar.edu.unlam.mobile.scaffolding.data.network.repository.ApiRepository
 import ar.edu.unlam.mobile.scaffolding.domain.models.ApiResponseMessage
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.usecases.GetFeedUseCase
@@ -12,6 +13,7 @@ class PostNewTuitService
     @Inject
     constructor(
         private val api: ApiRepository,
+        private val localDb: RoomDataBaseRepository,
         private val localData: LocalDataRepository,
         private val getFeed: GetFeedUseCase,
     ) : PostNewTuitUseCase {
