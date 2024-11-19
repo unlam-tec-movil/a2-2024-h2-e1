@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
@@ -16,6 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -85,8 +89,9 @@ fun MainScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     IconButton(
                         onClick = { controller.navigate("new_tuit") },
                     ) {
-                        Icon(Icons.Filled.Edit, contentDescription = "Agregar Tweet")
-                    }
+                            Icon(Icons.Filled.Edit, contentDescription = "Agregar Tweet")
+                        }
+
                 },
             ) { paddingValue ->
                 // NavHost es el componente que funciona como contenedor de los otros componentes que

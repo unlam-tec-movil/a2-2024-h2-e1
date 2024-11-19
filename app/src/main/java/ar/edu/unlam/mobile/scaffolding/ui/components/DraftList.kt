@@ -15,6 +15,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile.scaffolding.domain.tuit.models.SavedMessage
@@ -45,7 +46,7 @@ fun DraftList(
                                     Text(draft.text)
                                 }
                                 Column {
-                                    Surface(onClick = { deleteDraft(draft) }) {
+                                    Surface(color = Color.Transparent, onClick = { deleteDraft(draft) }) {
                                         Icon(Icons.Filled.DeleteForever, contentDescription = "eliminar borrador")
                                     }
                                 }

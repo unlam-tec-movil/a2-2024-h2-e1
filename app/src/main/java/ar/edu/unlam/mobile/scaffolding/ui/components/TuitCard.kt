@@ -43,7 +43,8 @@ fun TuitCard(
         Box(modifier = Modifier.padding(8.dp)) {
             Column {
                 Row {
-                    Text(tuit.message, fontSize = 24.sp)
+                    Text(tuit.message, fontSize = 24.sp,
+                        modifier = Modifier.padding(start = 8.dp, end = 8.dp))
                 }
             }
         }
@@ -80,7 +81,7 @@ fun Header(
             }
         }
         Button(onClick = { addFavorite(tuit.author, tuit.avatar_url) }) {
-            Text("+Follow")
+            Text("+ Follow")
         }
     }
 }

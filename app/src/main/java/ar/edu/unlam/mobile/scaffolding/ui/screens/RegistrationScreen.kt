@@ -58,7 +58,7 @@ fun RegistrationForm(
         val gradientColors = listOf(Cyan, Blue, Magenta)
 
         Text(
-            text = "registrarse",
+            text = "Registrarse",
             textAlign = TextAlign.Center,
             fontSize = 24.sp,
             modifier = Modifier.width(200.dp),
@@ -82,13 +82,13 @@ fun RegistrationForm(
         OutlinedTextField(
             value = name,
             onValueChange = viewModel::setName,
-            label = { Text("name") },
+            label = { Text("Name") },
         )
 
         OutlinedTextField(
             value = password,
             onValueChange = viewModel::setPassword,
-            label = { Text("password") },
+            label = { Text("Password") },
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -96,21 +96,36 @@ fun RegistrationForm(
         OutlinedButton(onClick = viewModel::register) {
             Text("Register")
         }
-
+        Spacer(modifier = Modifier.height(20.dp))
         Surface(onClick = { navController.navigate("login") }) {
-            Text(
-                text = "Ya estas registrado? Ingresa",
-                textAlign = TextAlign.Center,
-                fontSize = 24.sp,
-                modifier = Modifier.width(200.dp),
-                style =
+            Column {
+                Text(
+                    text = "¿Ya estas registrado?",
+                    textAlign = TextAlign.Center,
+                    fontSize = 18.sp,
+                    modifier = Modifier.width(200.dp),
+                    style =
                     TextStyle(
                         brush =
-                            Brush.linearGradient(
-                                colors = gradientColors,
-                            ),
+                        Brush.linearGradient(
+                            colors = gradientColors,
+                        ),
                     ),
-            )
+                )
+                Text(
+                    text = "Ingresa",
+                    textAlign = TextAlign.Center,
+                    fontSize = 22.sp,
+                    modifier = Modifier.width(200.dp),
+                    style =
+                    TextStyle(
+                        brush =
+                        Brush.linearGradient(
+                            colors = gradientColors,
+                        ),
+                    ),
+                )
+            }
         }
     }
 }
