@@ -31,12 +31,7 @@ fun ProfileScreen(
                     TuitFeed(
                         tuits = tuits,
                         likeEvent = { homeviewModel.likeButtonPressed(it) },
-                        addFavorite = {
-                            name,
-                            avatarUrl,
-                            ->
-                            homeviewModel.addToFavorite(name, avatarUrl)
-                        },
+                        addFavorite = homeviewModel::addToFavorite,
                     )
                 }
             }
