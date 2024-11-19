@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
@@ -40,20 +42,20 @@ fun EditProfileScreen(
                     modifier = Modifier
                         .padding(top = 16.dp, bottom = 20.dp)
                         .align(Alignment.CenterHorizontally) )
-                TextField(
+                OutlinedTextField(
                     value = name,
                     onValueChange = { viewModel.setName(it) },
                     label = { Text("Nombre") },
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                TextField(
+                OutlinedTextField(
                     value = avatarUrl,
                     onValueChange = { viewModel.setAvatar(it) },
                     label = { Text("URL del Avatar") },
                 )
 
-                Button(
+                OutlinedButton(
                     onClick = {
                         viewModel.updateProfile()
                         navController.navigate("profile")

@@ -15,6 +15,7 @@ import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -80,7 +81,7 @@ fun Header(
                 Text(text = "@" + tuit.author, Modifier.padding(horizontal = 10.dp), fontWeight = FontWeight.Black)
             }
         }
-        Button(onClick = { addFavorite(tuit.author, tuit.avatar_url) }) {
+        OutlinedButton(onClick = { addFavorite(tuit.author, tuit.avatar_url) }) {
             Text("+ Follow")
         }
     }
