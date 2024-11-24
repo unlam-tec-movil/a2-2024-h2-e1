@@ -1,7 +1,7 @@
 package ar.edu.unlam.mobile.scaffolding.domain.favorites.service
 
-import ar.edu.unlam.mobile.scaffolding.data.local.repository.RoomDataBaseRepository
 import ar.edu.unlam.mobile.scaffolding.domain.favorites.model.FavoriteUser
+import ar.edu.unlam.mobile.scaffolding.domain.favorites.repository.FavoritesRepositoryInterface
 import ar.edu.unlam.mobile.scaffolding.domain.favorites.usecase.FavoritesUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -9,18 +9,14 @@ import javax.inject.Inject
 class FavoritesService
     @Inject
     constructor(
-        private val localDb: RoomDataBaseRepository,
+        private val api: FavoritesRepositoryInterface,
     ) : FavoritesUseCase {
         override suspend fun addToFavorites(
             name: String,
             avatarUrl: String,
-        ) {
-            localDb.storeFavoriteUser(name, avatarUrl)
-        }
+        ) = api.addToFavorites(name, avatarUrl)
 
-        override suspend fun getFavorites(): Flow<List<FavoriteUser>> = localDb.getFavoritesUsers()
+        override suspend fun getFavorites(): Flow<List<FavoriteUser>> = api.getFavorites()
 
-        override suspend fun deleteFavoriteUser(user: FavoriteUser) {
-            localDb.deleteFavoriteUser(user)
-        }
+        override suspend fun deleteFavoriteUser(user: FavoriteUser) = api.deleteFavoriteUser(user)
     }

@@ -1,0 +1,43 @@
+package ar.edu.unlam.mobile.scaffolding.data.network.api.interfaces
+
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostBodyDto
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.NewPostResponseDto
+import ar.edu.unlam.mobile.scaffolding.data.network.api.dto.TuitResponseDto
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Headers
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
+
+interface TuitApiClient {
+    @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
+    @POST("me/tuits")
+    suspend fun postNotTweet(
+        @Header("Authorization") token: String,
+        @Body body: NewPostBodyDto,
+    ): NewPostResponseDto
+
+    @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
+    @GET("me/feed?")
+    suspend fun getFeed(
+        @Query("page") page: Int,
+        @Header("Authorization") token: String,
+    ): List<TuitResponseDto>
+
+    @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
+    @POST("me/tuits/{tuit_id}/likes")
+    suspend fun likePost(
+        @Path("tuit_id") tuitId: Int,
+        @Header("Authorization") token: String,
+    ): TuitResponseDto
+
+    @Headers("Application-Token: 2ebc5616c137d3228527ef06ca7230684673761fa2fb2ff5adc96cb01e53ccbc")
+    @DELETE("me/tuits/{tuit_id}/likes")
+    suspend fun unlikePost(
+        @Path("tuit_id") tuitId: Int,
+        @Header("Authorization") token: String,
+    ): TuitResponseDto
+}
